@@ -1,459 +1,456 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>图片素材网站 后台管理系统</title>
-    <link rel="stylesheet" type="text/css" href="css/animate.min.css" />
-<link rel="stylesheet" type="text/css" href="css/resetcommon.css" />
-<link rel="stylesheet" href="css/index.css" />
-    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
-    </script>
-    <script type="text/javascript">
-        function updata(ap) {
-            if ($("#dirs_name").val().length>2) {
-                if ($("#dirs_states").val().length>2){
-            $.ajax({
-                url: "dirs/updata",
-                type: "GET",
-                dataType: "JSON",
-                data: {"dirs_id": ap, "dirs_name": $("#dirs_name").val(), "dirs_state": $("#dirs_states").val()},
-                success: function (data) {
-                    if (data == '1') {
-                        loadData();
-                    } else {
-                        alert("错误:该行不存在");
-                    }
-                }
-            });
-                }else{
-                    alert("编码长度不能少于2位");
-                }
-            }else{
-                alert("名称长度不能少于2位");
-            }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/animate.min.css">
+    <link rel="stylesheet" href="../static/css/resetcommon.css">
+    <link rel="stylesheet" href="../static/css/index.css">
+<!--    <script src="https://apps.bdimg.com/libs/jquery/1.7.0/jquery.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="../static/js/jquery.SuperSlide.2.1.3.source.js"></script>
+    <script src="../static/js/wow.min.js"></script>
+    <style type="text/css">
+        #search{
+            display: none;
+            position: absolute;
+            top: 70px;
+            left: 118px;
+            width: 360px;
+            height: 190px;
+            border-radius: 3px;
+            border: 1px #F6821F solid;
+            background: white;
+            opacity:.9;
+            font-size: 16px;
+            box-sizing: border-box;
         }
 
+    </style>
 
-        function sava() {
-            if ($("#dirs_name").val().length>2) {
-            if ($("#dirs_states").val().length>2){
-            $.ajax({
-                url: "dirs/insert",
-                type: "GET",
-                dataType: "JSON",
-                data: {"dirs_name": $("#dirs_name").val(), "dirs_state": $("#dirs_states").val()},
-                success: function (data) {
-                    if (data == '1') {
-                        loadData();
-                    } else {
-                        alert("错误：该行已存在");
-                    }
-                }
-            });
 
-            }else{
-                alert("编码长度不能少于2位");
-            }
-            }else{
-                alert("名称长度不能少于2位");
-            }
-        }
-
-        function del(ad) {
-            $.ajax({
-                url: "dirs/delete",
-                type: "GET",
-                datatype: "JSON",
-                data: {"dirs_id": ad},
-                success: function (data) {
-                    if (data == '1') {
-                        loadData();
-                    } else {
-                        alert("错误：该行不存在或已删除");
-                    }
-                }
-            });
-
-        }
-
-        $(function () {
-            loadData();
-            // $("#row-tbody-tr").on("click","a",function () {
-            //     $(this).closest("tr").remove();
-            // })
-        });
-
-        function loadData() {
-            $.ajax({
-                url: "dirs/findAll",
-                type: 'GET',
-                datatype: "JSON",
-                success: function (data) {
-                    var student = $.parseJSON(data);
-                    $("#zidian table tbody tr").remove();
-                    $.each(student, function (index,  value) {
-                        console.log(value);
-                        $("#zidian table tbody").append("<tr><td>" + value.dirs_name + "</td>" + "<td>" + value.dirs_id + "</td>" + "<td>" + value.dirs_state + "</td>" + "<td><a onclick='updata(" + value.dirs_id + ")'>编辑</a>|<a onclick='del(" + value.dirs_id + ")'>删除</a></td></tr>");
-
-                    })
-                }
-            });
-        }
-    </script>
-<script src="js/nsw.pc.min.js"></script>
 </head>
 <body>
-    <div class="header">
-        <div class="container">
-            <h1>
-                <img src="img/logo.png" alt="" />
-            </h1>
-            <h2>图片素材网站<br />后台管理系统</h2>
-            <span>管理员：<a href="" class="name">李四</a> |  <a href="" class="tuichu">【退出】</a><br />
-            <a href="" class="ghzh">更换账号</a>
-            </span>
+<div class="top">
+    <h1><a href="javascript:;"><img src="../static/images/LOGO.png"><span>牛商网</span></a></h1>
+    <div class="chaolj">
+        <ul class="sd1">
+            <li><a href="javascript:;">首页</a></li>
+            <li><a href="javascript:;">多元背景</a></li>
+            <li><a href="javascript:;">唯美人像</a></li>
+            <li><a href="javascript:;">创意插画 </a></li>
+            <li><a href="javascript:;">免扣png</a></li>
+        </ul>
+        <div class="denglu">
+            <a href="javascript:;">
+                <i>开通VIP</i>
+                <div class="xialailb">
+                    <em>登录
+                        <div class="dengl">
+                            <ul>
+                                <li><a href="javascript:;">我的订单</a></li>
+                                <li><a href="javascript:;">我的套餐</a></li>
+                                <li><a href="javascript:;">我的收藏</a></li>
+                                <li><a href="javascript:;">我要上传</a></li>
+                                <li><a href="javascript:;">账户管理</a></li>
+                                <li><a href="javascript:;">退出</a></li>
+                            </ul>
+                        </div>
+                    </em>
+                </div>
+            </a>
         </div>
     </div>
-    <div class="backstage_main">
-        <div class="backstage_main_left">
-            <div class="nav">
-                <div class="wdgj">我的工具</div>
-                <div class="main_nav">
-                    <h3 class="yhgl yj">
-                        用户管理
-                    </h3>
-                        <div class="yhlb zdh huad">
-                            用户列表
-                        </div>
-                    <h3 class="yj qxgl">
-                        权限管理
-                    </h3>
-                        <div class="qxglzdh huad">
-                            <div class="jsgl zdh">角色管理</div>
-                            <div class="cdgl zdh">菜单管理</div>
-                            <div class="zygl zdh">资源管理</div>
-                        </div>
-                    <h3 class="yj tpgl">
-                        图片管理
-                    </h3>
-                            <div class="tpzdh huad">
-                                <div class="tpsh zdh">图片审核</div>
-                                <div class="tpxg zdh">图片修改</div>
-                            </div>
-                    <h3 class="yj ddgl">
-                        订单管理
-                    </h3>
-                    <div class="ddlb zdh huad">
-                        订单列表
-                    </div>
-                    <h3 class="yj xtsz">
-                        系统设置
-                    </h3>
-                    <div class="zdgl zdh huad">
-                        字典管理
-                    </div>
-                </div>
-            </div>
+</div>
+<div class="rts">
+    <div id="slideBox" class="slideBox">
+        <div class="bd bd1">
+            <ul>
+                <li style="display: block;">
+                    <img src="../static/images/banner.png" >
+                </li>
+                <li style="display: list-item;">
+                    <img src="../static/images/banner2.jpg">
+                </li>
+                <li>
+                    <img src="../static/images/banner3.jpg">
+                </li>
+            </ul>
         </div>
-        <div class="backstage_main_right">
-            <div class="dy1">
-                <div class="bread_tit">当前位置 | 用户管理 > 用户列表</div>
-                <a href="" class="xzjs">新增用户+</a>
-                <div class="jsmc">角色名称: <input type="text" /></div>
-                <div class="jsfz">角色分组: <input type="text" /></div>
-                <a class="sousuo1"  href="">搜索</a>
-                <div class="row">
-                    <table>
-                        <thead>
-                            <th>角色名称</th>
-                            <th>角色分组</th>
-                            <th>角色编码</th>
-                            <th>创建时间</th>
-                            <th>操作</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>CONAN_1996</td>
-                                <td>管理员</td>
-                                <td>001</td>
-                                <td>2019-11-4</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
-                            <tr>
-                                <td>CONAN_1996</td>
-                                <td>管理员</td>
-                                <td>001</td>
-                                <td>2019-11-4</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <div class="hd hd1">
+            <ul>
+                <li class="on"></li>
+                <li class=""></li>
+                <li class=""></li>
+            </ul>
+
+        </div>
+
+        <a class="prev" href="javascript:void(0)"></a>
+        <a class="next" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="ssk">
+    <input type="text" placeholder="请输入内容" id="keyword" name="keyword" >
+    <div class="sstb">
+        <a href="javascript:;"><img src="../static/images/Search box.png" alt=""></a>
+    </div>
+    <div class="gduo">
+        <select>
+            <option>更多</option>
+            <option>Saab</option>
+            <option>Mercedes</option>
+            <option>Audi</option>
+        </select>
+    </div>
+    <div id="search">
+        <ul id="content_ul">
+
+        </ul>
+    </div>
+</div>
+
+<div class="toy">
+    <a href="javascript:;"><h2>潮流综合</h2></a>
+</div>
+<div class="select">
+    <a href="javascript:;">最新上传</a>
+    <a href="javascript:;">今日热门</a>
+    <a href="javascript:;">精选专辑</a>
+    <a href="javascript:;">最高浏览</a>
+</div>
+<div class="cptp">
+    <ul>
+        <li><a href="javascript:;"><img src="../static/images/duoyuan-bj4.png"><span>霜降 · 照片</span>
+            <div class="yy">
+                <div class="web">
+                    <i>霜降 · 照片</i>
+                    <em>霜降 节气 摄影图</em>
                 </div>
             </div>
-            <div class="dy2">
-                <div class="bread_tit">当前位置 | 权限管理 > 角色管理</div>
-                <a href="" class="xzjs">新增角色+</a>
-                <div class="jsmc">角色名称: <input type="text" /></div>
-                <div class="jsfz">角色分组: <input type="text" /></div>
-                <a class="sousuo1"  href="">搜索</a>
-                <div class="row">
-                    <table>
-                        <thead>
-                            <th>角色名称</th>
-                            <th>角色分组</th>
-                            <th>角色编码</th>
-                            <th>创建时间</th>
-                            <th>操作</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>CONAN_1996</td>
-                                <td>管理员</td>
-                                <td>001</td>
-                                <td>2019-11-4</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
-                            <tr>
-                                <td>CONAN_1996</td>
-                                <td>管理员</td>
-                                <td>001</td>
-                                <td>2019-11-4</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+        </a></li>
+        <li><a href="javascript:;"><img src="../static/images/zuixin-tp2.png"><span>万圣节 · 照片</span>
+            <div class="yy">
+                <div class="web">
+                    <i>万圣节 · 照片</i>
+                    <em>万圣节 摄影图</em>
                 </div>
             </div>
-            <div class="dy3">
-                <div class="bread_tit">当前位置 | 权限管理 > 菜单管理</div>
-                <a href="" class="xzjs">新增菜单+</a>
-                <div class="jsmc">菜单名称: <input type="text" /></div>
-                <div class="jsfz">菜单编码: <input type="text" /></div>
-                <a class="sousuo1"  href="">搜索</a>
-                <div class="row">
-                    <table>
-                        <thead>
-                            <th>菜单名称</th>
-                            <th>菜单管理员</th>
-                            <th>菜单编码</th>
-                            <th>创建时间</th>
-                            <th>操作</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>移动撒花</td>
-                                <td>CONAN_1996</td>
-                                <td>001</td>
-                                <td>2019-11-4</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
-                            <tr>
-                                <td>移动撒花</td>
-                                <td>CONAN_1996</td>
-                                <td>001</td>
-                                <td>2019-11-4</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+        </a></li>
+        <li><a href="javascript:;"><img src="../static/images/zuixin-tp3.png"><span>大米 · 食物</span>
+            <div class="yy">
+                <div class="web">
+                    <i>大米 · 食物</i>
+                    <em>大米 摄影图</em>
                 </div>
             </div>
-            <div class="dy4">
-                <div class="bread_tit">当前位置 | 权限管理 > 资源管理</div>
-                <a href="" class="xzjs">新增资源+</a>
-                <div class="jsmc">资源名称: <input type="text" /></div>
-                <div class="jsfz">资源分组: <input type="text" /></div>
-                <a class="sousuo1"  href="">搜索</a>
-                <div class="row">
-                    <table>
-                        <thead>
-                            <th>资源名称</th>
-                            <th>权限码</th>
-                            <th>资源类型</th>
-                            <th>父级资源</th>
-                            <th>是否可用</th>
-                            <th>操作</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>移动撒花</td>
-                                <td>001</td>
-                                <td>唯美人想</td>
-                                <td>123</td>
-                                <td>可用</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
-                            <tr>
-                                <td>移动撒花</td>
-                                <td>001</td>
-                                <td>唯美人想</td>
-                                <td>123</td>
-                                <td>可用</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+        </a></li>
+        <li><a href="javascript:;"><img src="../static/images/zuixin-tp4.png"><span>杂粮米 · 食物</span>
+            <div class="yy">
+                <div class="web">
+                    <i>杂粮米 · 食物</i>
+                    <em>杂粮米 摄影图</em>
                 </div>
             </div>
-            <div class="dy7">
-                <div class="bread_tit">当前位置 | 图片管理 > 图片审核</div>
-                <div class="jsmc">图片名称: <input type="text" /></div>
-                <div class="jsfz">图片分组: <input type="text" /></div>
-                <a class="sousuo1"  href="">搜索</a>
-                <div class="row">
-                    <table>
-                        <thead>
-                            <th>分类名称</th>
-                            <th>序号</th>
-                            <th>图片名称</th>
-                            <th>审核状态</th>
-                            <th>审核时间</th>
-                            <th>上传者</th>
-                            <th>操作</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>CONAN_1996</td>
-                                <td>管理员</td>
-                                <td>001</td>
-                                <td>2019-11-4</td>
-                                <td>大家啊是是非</td>
-                                <td>大家啊是是非</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
-                            <tr>
-                                <td>CONAN_1996</td>
-                                <td>管理员</td>
-                                <td>001</td>
-                                <td>2019-11-4</td>
-                                <td>大家啊是是非</td>
-                                <td>大家啊是是非</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+        </a></li>
+        <li><a href="javascript:;"><img src="../static/images/zuixin-tp5.png"><span>红辣椒 · 食物</span>
+            <div class="yy">
+                <div class="web">
+                    <i>红辣椒 · 食物</i>
+                    <em>红辣椒 摄影图</em>
                 </div>
             </div>
-            <div class="dy8">
-                <div class="bread_tit">当前位置 | 图片管理 > 图片修改</div>
-                <div class="jsmc">图片名称: <input type="text" /></div>
-                <div class="jsfz">图片分组: <input type="text" /></div>
-                <a class="sousuo1"  href="">搜索</a>
-                <div class="row">
-                    <table>
-                        <thead>
-                            <th>分类名称</th>
-                            <th>序号</th>
-                            <th>图片名称</th>
-                            <th>审核状态</th>
-                            <th>审核时间</th>
-                            <th>上传者</th>
-                            <th>操作</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>CONAN_1996</td>
-                                <td>管理员</td>
-                                <td>001</td>
-                                <td>2019-11-4</td>
-                                <td>大家啊是是非</td>
-                                <td>大家啊是是非</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
-                            <tr>
-                                <td>CONAN_1996</td>
-                                <td>管理员</td>
-                                <td>001</td>
-                                <td>2019-11-4</td>
-                                <td>大家啊是是非</td>
-                                <td>大家啊是是非</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+        </a></li>
+        <li><a href="javascript:;"><img src="../static/images/zuixin-tp6.png"><span>万圣节 · 插画</span>
+            <div class="yy">
+                <div class="web">
+                    <i>万圣节 · 插画</i>
+                    <em>万圣节 摄影图</em>
                 </div>
             </div>
-            <div class="dy9">
-                <div class="bread_tit">当前位置 | 订单管理 > 订单列表</div>
-                <div class="jsmc">订单号: <input type="text" /></div>
-                <div class="jsfz">订单分类: <input type="text" /></div>
-                <a class="sousuo1"  href="">搜索</a>
-                <div class="row">
-                    <table>
-                        <thead>
-                            <th>分类名称</th>
-                            <th>单号</th>
-                            <th>订单状态</th>
-                            <th>成交时间</th>
-                            <th>成交用户</th>
-                            <th>操作</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>CONAN_1996</td>
-                                <td>管理员</td>
-                                <td>001</td>
-                                <td>2019-11-4</td>
-                                <td>jdsafbasn</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
-                            <tr>
-                                <td>CONAN_1996</td>
-                                <td>管理员</td>
-                                <td>001</td>
-                                <td>2019-11-4</td>
-                                <td>jdsafbasn</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+        </a></li>
+        <li><a href="javascript:;"><img src="../static/images/zuixin-tp7.png"><span>五谷丰登 · 新年</span>
+            <div class="yy">
+                <div class="web">
+                    <i>五谷丰登 · 新年</i>
+                    <em>五谷丰登 摄影图</em>
                 </div>
             </div>
-            <div class="dy10">
-                <div class="bread_tit">当前位置 | 系统设置 > 分类管理</div>
-                <a onclick="sava()" class="xzzd">新增字典+</a>
-                <div class="jsmc">字典名称: <input type="text" id="dirs_name" /></div>
-                <div class="jsfz">字典编码: <input type="text" id="dirs_states" /></div>
-                <a class="sousuo1"  href="">搜索</a>
-                <div class="row" id="zidian">
-                    <table>
-                        <thead>
-                            <th>分类名称</th>
-                            <th>单号</th>
-                            <th>订单状态</th>
-                            <th>操作</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>CONAN_1996</td>
-                                <td>管理员</td>
-                                <td>001</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
-                            <tr>
-                                <td>CONAN_1997</td>
-                                <td>管理员</td>
-                                <td>002</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+        </a></li>
+        <li><a href="javascript:;"><img src="../static/images/zuixin-tp8.png"><span>万圣节城堡 · 插画</span>
+            <div class="yy">
+                <div class="web">
+                    <i>万圣节城堡 · 插画</i>
+                    <em>万圣节城堡 摄影图</em>
                 </div>
             </div>
+        </a></li>
+    </ul>
+</div>
+<div class="btn">
+    <a href="javascript:;">查看更多</a>
+</div>
+<div class="toy2">
+    <a href="javascript:;"><h2>优选图片</h2></a>
+</div>
+<div class="select2">
+    <a href="javascript:;">多元背景</a>
+    <a href="javascript:;">唯美人像</a>
+    <a href="javascript:;">创意插画</a>
+    <a href="javascript:;">免抠png</a>
+</div>
+<div class="ytp">
+    <ul>
+        <li><a href="javascript:;"><img src="../static/images/tp1.png"></a>
+            <div class="mei">
+                <div class="bj">
+                    <span>人像  |  美女</span>
+                    <em>CONAN_1996</em>
+                </div>
+                <div class="xia">
+                    <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                    <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                </div>
+            </div>
+        </li>
+        <li><a href="javascript:;"><img src="../static/images/tp2.png"></a>
+            <div class="mei">
+                <div class="bj">
+                    <span>人像  |  美女</span>
+                    <em>CONAN_1996</em>
+                </div>
+                <div class="xia">
+                    <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                    <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                </div>
+            </div>
+        </li>
+        <li><a href="javascript:;"><img src="../static/images/tp3.png"></a>
+            <div class="mei">
+                <div class="bj">
+                    <span>人像  |  美女</span>
+                    <em>CONAN_1996</em>
+                </div>
+                <div class="xia">
+                    <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                    <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                </div>
+            </div>
+        </li>
+        <li><a href="javascript:;"><img src="../static/images/tp4.png"></a>
+            <div class="mei">
+                <div class="bj">
+                    <span>人像  |  美女</span>
+                    <em>CONAN_1996</em>
+                </div>
+                <div class="xia">
+                    <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                    <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                </div>
+            </div>
+        </li>
+        <li><a href="javascript:;"><img src="../static/images/tp5.png"></a>
+            <div class="mei">
+                <div class="bj">
+                    <span>人像  |  美女</span>
+                    <em>CONAN_1996</em>
+                </div>
+                <div class="xia">
+                    <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                    <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                </div>
+            </div>
+        </li>
+        <li><a href="javascript:;"><img src="../static/images/tp6.png"></a>
+            <div class="mei">
+                <div class="bj">
+                    <span>人像  |  美女</span>
+                    <em>CONAN_1996</em>
+                </div>
+                <div class="xia">
+                    <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                    <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                </div>
+            </div>
+        </li>
+        <li><a href="javascript:;"><img src="../static/images/tp7.png"></a>
+            <div class="mei">
+                <div class="bj">
+                    <span>人像  |  美女</span>
+                    <em>CONAN_1996</em>
+                </div>
+                <div class="xia">
+                    <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                    <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                </div>
+            </div>
+        </li>
+        <li><a href="javascript:;"><img src="../static/images/tp7.7.png"></a>
+            <div class="mei">
+                <div class="bj">
+                    <span>人像  |  美女</span>
+                    <em>CONAN_1996</em>
+                </div>
+                <div class="xia">
+                    <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                    <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                </div>
+            </div>
+        </li>
+        <li><a href="javascript:;"><img src="../static/images/tp8.png"></a>
+            <div class="mei">
+                <div class="bj">
+                    <span>人像  |  美女</span>
+                    <em>CONAN_1996</em>
+                </div>
+                <div class="xia">
+                    <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                    <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="btn2">
+    <h3>海量高清图等你来发现</h3>
+    <a href="javascript:;">发现更多</a>
+</div>
+<div class="KaiTongHuiYuan">
+    <div class="yic">
+        <a href="javascript:;">查看详情</a>
+    </div>
+    <div class="huiyuan">
+        <h3>开通会员，享受超值套餐</h3>
+        <div class="vip">
+            <h4>高质量图库，超低价格</h4>
         </div>
     </div>
-    <script>
-        jQuery(".main_nav").slide({titCell:".yj", targetCell:".huad",defaultIndex:5,effect:"slideDown",delayTime:300,trigger:"click"});
-        </script>
-        <script>
-            jQuery(".backstage_main").slide({
-                mainCell: ".backstage_main_right",
-                effect: "fade",
-                titCell: ".main_nav .zdh",
-                autoPlay: false,
-                titOnClassName: "onn",
-                trigger:"click"
-            });
-        </script>
+</div>
+<div class="mfe">
+    <a href="javascript:;"><h2>注册获得每周免费图片</h2></a>
+    <i>FREE PICTURES</i>
+    <a href="javascript:;"><span>查看更多+</span></a>
+    </h2>
+    <div class="mfetp">
+        <ul>
+            <li><a href="javascript:;"><img src="../static/images/mf1.png"></a></li>
+            <li><a href="javascript:;"><img src="../static/images/mf2.png"></a></li>
+            <li><a href="javascript:;"><img src="../static/images/mf3.png"></a></li>
+        </ul>
+    </div>
+</div>
+<div class="dixian">
+    <h3>我可是有底线的哦</h3>
+</div>
+<div class="finish">
+    <div class="finish_logo">
+        <a href="javascript:;"><img src="../static/images/LOGO2.png"/>
+            <span>助力全国中小企业成长</span></a>
+    </div>
+    <div class="youqinglj">
+        <ul>
+            <li><strong>关于我们</strong>
+                <a href="javascript:;">关于我们</a>
+                <a href="javascript:;">加入我们</a>
+                <a href="javascript:;">帮助中心</a>
+                <a href="javascript:;">服务条款</a>
+            </li>
+        </ul>
+        <ul>
+            <li><strong>VIP服务</strong>
+                <a href="javascript:;">个人VIP</a>
+                <a href="javascript:;">购买套餐</a>
+                <a href="javascript:;">服务选择</a>
+                <a href="javascript:;">服务范围</a>
+            </li>
+        </ul>
+        <ul>
+            <li><strong>了解更多</strong>
+                <a href="javascript:;">授权协议</a>
+                <a href="javascript:;">使用条款</a>
+                <a href="javascript:;">隐私政策</a>
+            </li>
+        </ul>
+    </div>
+    <div class="gongzhao">
+        <img src="../static/images/wx.png"/>
+        <img src="../static/images/qq.png"/>
+    </div>
+    <div class="kefu">
+        <span>客服中心</span>
+        <i>4000-333-087</i>
+        <a href="javascript:;">在线客服</a>
+    </div>
+    <div class="db">
+        <span>© 2019 长沙市牛商网络股份有限公司</span>
+    </div>
+</div>
+<script type="text/javascript">
+    $( function() {
+        $("#keyword").autocomplete({
+            minChars: 0,
+            autoFill:true,
+            source : function(request, response) {
+                var keywordValue = $("#keyword").val()
+                if(keywordValue==""){
+                    $("#search ul li").empty();
+                    return;
+                }
+                $.ajax({
+                    type : "GET",
+                    url : "stu/findselect",
+                    dataType : "json",
+                    data : {
+                        keyword : $("#keyword").val()
+                    },
+                    success : function(json) {
+                        $("#search ul li").empty();
+                        response($.map(json, function(item) {
+                            $("#search ul").append("<li style='border-radius: 3px;margin-top: 2px;padding-left: 6px;'>" +
+                                "<a href='https://www.baidu.com' style='text-decoration: none'>"+item.name+"</a></li>");
+                        }));
+                    }
+                });
+            }
+        });
+
+        $("#keyword").blur(function () {
+            $("#search").hide();
+        });
+
+        $("#keyword").focus(function () {
+            $("#search").show();
+        });
+
+        $("#keyword").keyup(function () {
+            var code=$(this).val();
+            if ($.trim(code)==""){
+                $("#search").hide();
+                return;
+            }else {
+                $("#search").show();
+            }
+        });
+
+        $("#content_ul").on("mouseenter","li",function () {
+           $(this).css("background","#ededed");
+        });
+        $("#content_ul").on("mouseout","li",function () {
+            $(this).css("background","white");
+        });
+
+    });
+</script>
+<script type="text/javascript">
+    jQuery(".slideBox").slide({mainCell:".bd ul",effect:"fold",autoPlay:true});
+    console.log("............--------");
+</script>
+<script>
+    if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))){
+        new WOW().init();};
+</script>
 </body>
 </html>

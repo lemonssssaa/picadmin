@@ -1,0 +1,459 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>图片素材网站 后台管理系统</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/animate.min.css" />
+<link rel="stylesheet" type="text/css" href="../static/css/resetcommon.css" />
+<link rel="stylesheet" href="../static/css/index.css" />
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+        function updata(ap) {
+            if ($("#dirs_name").val().length>2) {
+                if ($("#dirs_states").val().length>2){
+            $.ajax({
+                url: "dirs/updata",
+                type: "GET",
+                dataType: "JSON",
+                data: {"dirs_id": ap, "dirs_name": $("#dirs_name").val(), "dirs_state": $("#dirs_states").val()},
+                success: function (data) {
+                    if (data == '1') {
+                        loadData();
+                    } else {
+                        alert("错误:该行不存在");
+                    }
+                }
+            });
+                }else{
+                    alert("编码长度不能少于2位");
+                }
+            }else{
+                alert("名称长度不能少于2位");
+            }
+        }
+
+
+        function sava() {
+            if ($("#dirs_name").val().length>2) {
+            if ($("#dirs_states").val().length>2){
+            $.ajax({
+                url: "dirs/insert",
+                type: "GET",
+                dataType: "JSON",
+                data: {"dirs_name": $("#dirs_name").val(), "dirs_state": $("#dirs_states").val()},
+                success: function (data) {
+                    if (data == '1') {
+                        loadData();
+                    } else {
+                        alert("错误：该行已存在");
+                    }
+                }
+            });
+
+            }else{
+                alert("编码长度不能少于2位");
+            }
+            }else{
+                alert("名称长度不能少于2位");
+            }
+        }
+
+        function del(ad) {
+            $.ajax({
+                url: "dirs/delete",
+                type: "GET",
+                datatype: "JSON",
+                data: {"dirs_id": ad},
+                success: function (data) {
+                    if (data == '1') {
+                        loadData();
+                    } else {
+                        alert("错误：该行不存在或已删除");
+                    }
+                }
+            });
+
+        }
+
+        $(function () {
+            loadData();
+            // $("#row-tbody-tr").on("click","a",function () {
+            //     $(this).closest("tr").remove();
+            // })
+        });
+
+        function loadData() {
+            $.ajax({
+                url: "dirs/findAll",
+                type: 'GET',
+                datatype: "JSON",
+                success: function (data) {
+                    var student = $.parseJSON(data);
+                    $("#zidian table tbody tr").remove();
+                    $.each(student, function (index,  value) {
+                        console.log(value);
+                        $("#zidian table tbody").append("<tr><td>" + value.dirs_name + "</td>" + "<td>" + value.dirs_id + "</td>" + "<td>" + value.dirs_state + "</td>" + "<td><a onclick='updata(" + value.dirs_id + ")'>编辑</a>|<a onclick='del(" + value.dirs_id + ")'>删除</a></td></tr>");
+
+                    })
+                }
+            });
+        }
+    </script>
+<script src="../static/js/nsw.pc.min.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>
+                <img src="../static/images/logo.png" alt="" />
+            </h1>
+            <h2>图片素材网站<br />后台管理系统</h2>
+            <span>管理员：<a href="" class="name">李四</a> |  <a href="" class="tuichu">【退出】</a><br />
+            <a href="" class="ghzh">更换账号</a>
+            </span>
+        </div>
+    </div>
+    <div class="backstage_main">
+        <div class="backstage_main_left">
+            <div class="nav">
+                <div class="wdgj">我的工具</div>
+                <div class="main_nav">
+                    <h3 class="yhgl yj">
+                        用户管理
+                    </h3>
+                        <div class="yhlb zdh huad">
+                            用户列表
+                        </div>
+                    <h3 class="yj qxgl">
+                        权限管理
+                    </h3>
+                        <div class="qxglzdh huad">
+                            <div class="jsgl zdh">角色管理</div>
+                            <div class="cdgl zdh">菜单管理</div>
+                            <div class="zygl zdh">资源管理</div>
+                        </div>
+                    <h3 class="yj tpgl">
+                        图片管理
+                    </h3>
+                            <div class="tpzdh huad">
+                                <div class="tpsh zdh">图片审核</div>
+                                <div class="tpxg zdh">图片修改</div>
+                            </div>
+                    <h3 class="yj ddgl">
+                        订单管理
+                    </h3>
+                    <div class="ddlb zdh huad">
+                        订单列表
+                    </div>
+                    <h3 class="yj xtsz">
+                        系统设置
+                    </h3>
+                    <div class="zdgl zdh huad">
+                        字典管理
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="backstage_main_right">
+            <div class="dy1">
+                <div class="bread_tit">当前位置 | 用户管理 > 用户列表</div>
+                <a href="" class="xzjs">新增用户+</a>
+                <div class="jsmc">角色名称: <input type="text" /></div>
+                <div class="jsfz">角色分组: <input type="text" /></div>
+                <a class="sousuo1"  href="">搜索</a>
+                <div class="row">
+                    <table>
+                        <thead>
+                            <th>角色名称</th>
+                            <th>角色分组</th>
+                            <th>角色编码</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CONAN_1996</td>
+                                <td>管理员</td>
+                                <td>001</td>
+                                <td>2019-11-4</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>CONAN_1996</td>
+                                <td>管理员</td>
+                                <td>001</td>
+                                <td>2019-11-4</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="dy2">
+                <div class="bread_tit">当前位置 | 权限管理 > 角色管理</div>
+                <a href="" class="xzjs">新增角色+</a>
+                <div class="jsmc">角色名称: <input type="text" /></div>
+                <div class="jsfz">角色分组: <input type="text" /></div>
+                <a class="sousuo1"  href="">搜索</a>
+                <div class="row">
+                    <table>
+                        <thead>
+                            <th>角色名称</th>
+                            <th>角色分组</th>
+                            <th>角色编码</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CONAN_1996</td>
+                                <td>管理员</td>
+                                <td>001</td>
+                                <td>2019-11-4</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>CONAN_1996</td>
+                                <td>管理员</td>
+                                <td>001</td>
+                                <td>2019-11-4</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="dy3">
+                <div class="bread_tit">当前位置 | 权限管理 > 菜单管理</div>
+                <a href="" class="xzjs">新增菜单+</a>
+                <div class="jsmc">菜单名称: <input type="text" /></div>
+                <div class="jsfz">菜单编码: <input type="text" /></div>
+                <a class="sousuo1"  href="">搜索</a>
+                <div class="row">
+                    <table>
+                        <thead>
+                            <th>菜单名称</th>
+                            <th>菜单管理员</th>
+                            <th>菜单编码</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>移动撒花</td>
+                                <td>CONAN_1996</td>
+                                <td>001</td>
+                                <td>2019-11-4</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>移动撒花</td>
+                                <td>CONAN_1996</td>
+                                <td>001</td>
+                                <td>2019-11-4</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="dy4">
+                <div class="bread_tit">当前位置 | 权限管理 > 资源管理</div>
+                <a href="" class="xzjs">新增资源+</a>
+                <div class="jsmc">资源名称: <input type="text" /></div>
+                <div class="jsfz">资源分组: <input type="text" /></div>
+                <a class="sousuo1"  href="">搜索</a>
+                <div class="row">
+                    <table>
+                        <thead>
+                            <th>资源名称</th>
+                            <th>权限码</th>
+                            <th>资源类型</th>
+                            <th>父级资源</th>
+                            <th>是否可用</th>
+                            <th>操作</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>移动撒花</td>
+                                <td>001</td>
+                                <td>唯美人想</td>
+                                <td>123</td>
+                                <td>可用</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>移动撒花</td>
+                                <td>001</td>
+                                <td>唯美人想</td>
+                                <td>123</td>
+                                <td>可用</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="dy7">
+                <div class="bread_tit">当前位置 | 图片管理 > 图片审核</div>
+                <div class="jsmc">图片名称: <input type="text" /></div>
+                <div class="jsfz">图片分组: <input type="text" /></div>
+                <a class="sousuo1"  href="">搜索</a>
+                <div class="row">
+                    <table>
+                        <thead>
+                            <th>分类名称</th>
+                            <th>序号</th>
+                            <th>图片名称</th>
+                            <th>审核状态</th>
+                            <th>审核时间</th>
+                            <th>上传者</th>
+                            <th>操作</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CONAN_1996</td>
+                                <td>管理员</td>
+                                <td>001</td>
+                                <td>2019-11-4</td>
+                                <td>大家啊是是非</td>
+                                <td>大家啊是是非</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>CONAN_1996</td>
+                                <td>管理员</td>
+                                <td>001</td>
+                                <td>2019-11-4</td>
+                                <td>大家啊是是非</td>
+                                <td>大家啊是是非</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="dy8">
+                <div class="bread_tit">当前位置 | 图片管理 > 图片修改</div>
+                <div class="jsmc">图片名称: <input type="text" /></div>
+                <div class="jsfz">图片分组: <input type="text" /></div>
+                <a class="sousuo1"  href="">搜索</a>
+                <div class="row">
+                    <table>
+                        <thead>
+                            <th>分类名称</th>
+                            <th>序号</th>
+                            <th>图片名称</th>
+                            <th>审核状态</th>
+                            <th>审核时间</th>
+                            <th>上传者</th>
+                            <th>操作</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CONAN_1996</td>
+                                <td>管理员</td>
+                                <td>001</td>
+                                <td>2019-11-4</td>
+                                <td>大家啊是是非</td>
+                                <td>大家啊是是非</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>CONAN_1996</td>
+                                <td>管理员</td>
+                                <td>001</td>
+                                <td>2019-11-4</td>
+                                <td>大家啊是是非</td>
+                                <td>大家啊是是非</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="dy9">
+                <div class="bread_tit">当前位置 | 订单管理 > 订单列表</div>
+                <div class="jsmc">订单号: <input type="text" /></div>
+                <div class="jsfz">订单分类: <input type="text" /></div>
+                <a class="sousuo1"  href="">搜索</a>
+                <div class="row">
+                    <table>
+                        <thead>
+                            <th>分类名称</th>
+                            <th>单号</th>
+                            <th>订单状态</th>
+                            <th>成交时间</th>
+                            <th>成交用户</th>
+                            <th>操作</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CONAN_1996</td>
+                                <td>管理员</td>
+                                <td>001</td>
+                                <td>2019-11-4</td>
+                                <td>jdsafbasn</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>CONAN_1996</td>
+                                <td>管理员</td>
+                                <td>001</td>
+                                <td>2019-11-4</td>
+                                <td>jdsafbasn</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="dy10">
+                <div class="bread_tit">当前位置 | 系统设置 > 分类管理</div>
+                <a onclick="sava()" class="xzzd">新增字典+</a>
+                <div class="jsmc">字典名称: <input type="text" id="dirs_name" /></div>
+                <div class="jsfz">字典编码: <input type="text" id="dirs_states" /></div>
+                <a class="sousuo1"  href="">搜索</a>
+                <div class="row" id="zidian">
+                    <table>
+                        <thead>
+                            <th>分类名称</th>
+                            <th>单号</th>
+                            <th>订单状态</th>
+                            <th>操作</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CONAN_1996</td>
+                                <td>管理员</td>
+                                <td>001</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>CONAN_1997</td>
+                                <td>管理员</td>
+                                <td>002</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        jQuery(".main_nav").slide({titCell:".yj", targetCell:".huad",defaultIndex:5,effect:"slideDown",delayTime:300,trigger:"click"});
+        </script>
+        <script>
+            jQuery(".backstage_main").slide({
+                mainCell: ".backstage_main_right",
+                effect: "fade",
+                titCell: ".main_nav .zdh",
+                autoPlay: false,
+                titOnClassName: "onn",
+                trigger:"click"
+            });
+        </script>
+</body>
+</html>
