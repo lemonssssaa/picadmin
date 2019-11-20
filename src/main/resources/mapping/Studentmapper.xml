@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.springbootday.maper.StudentMapper">
-    <resultMap id="studentResultMap" type="com.example.springbootday.entity.Student">
+<mapper namespace="com.nsw.maper.StudentMapper">
+    <resultMap id="studentResultMap" type="com.nsw.dirs.Student">
                 <id column="id" jdbcType="INTEGER" property="id"/>
                 <result column="name" jdbcType="VARCHAR" property="name"/>
                 <result column="url" jdbcType="VARCHAR" property="url"/>
     </resultMap>
-    <select id="findSjk" resultMap="studentResultMap">
-        select *from tptp
-    </select>
-    <select id="findSelect" resultType="com.example.springbootday.entity.Student" parameterType="string">
+    <!--    <select id="findSjk" resultMap="studentResultMap">
+           select *from tptp
+       </select>-->
+    <select id="findSelect" resultType="com.nsw.dirs.Student" parameterType="string">
         select *from tptp where name like concat('%',#{keyword},'%')
     </select>
 </mapper>

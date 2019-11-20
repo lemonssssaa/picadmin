@@ -3,28 +3,28 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>图片素材网站 后台管理系统</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/animate.min.css" />
-<link rel="stylesheet" type="text/css" href="../static/css/resetcommon.css" />
-<link rel="stylesheet" href="../static/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/animate.min.css" />
+<link rel="stylesheet" type="text/css" href="../../static/css/resetcommon.css" />
+<link rel="stylesheet" href="../../static/css/admin/index.css" />
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
     </script>
     <script type="text/javascript">
         function updata(ap) {
             if ($("#dirs_name").val().length>2) {
                 if ($("#dirs_states").val().length>2){
-            $.ajax({
-                url: "dirs/updata",
-                type: "GET",
-                dataType: "JSON",
-                data: {"dirs_id": ap, "dirs_name": $("#dirs_name").val(), "dirs_state": $("#dirs_states").val()},
-                success: function (data) {
-                    if (data == '1') {
-                        loadData();
-                    } else {
-                        alert("错误:该行不存在");
-                    }
-                }
-            });
+                    $.ajax({
+                        url: "dirs/updata",
+                        type: "GET",
+                        dataType: "JSON",
+                        data: {"dirs_id": ap, "dirs_name": $("#dirs_name").val(), "dirs_state": $("#dirs_states").val()},
+                        success: function (data) {
+                            if (data == '1') {
+                                loadData();
+                            } else {
+                                alert("错误:该行不存在");
+                            }
+                        }
+                    });
                 }else{
                     alert("编码长度不能少于2位");
                 }
@@ -36,24 +36,24 @@
 
         function sava() {
             if ($("#dirs_name").val().length>2) {
-            if ($("#dirs_states").val().length>2){
-            $.ajax({
-                url: "dirs/insert",
-                type: "GET",
-                dataType: "JSON",
-                data: {"dirs_name": $("#dirs_name").val(), "dirs_state": $("#dirs_states").val()},
-                success: function (data) {
-                    if (data == '1') {
-                        loadData();
-                    } else {
-                        alert("错误：该行已存在");
-                    }
-                }
-            });
+                if ($("#dirs_states").val().length>2){
+                    $.ajax({
+                        url: "dirs/insert",
+                        type: "GET",
+                        dataType: "JSON",
+                        data: {"dirs_name": $("#dirs_name").val(), "dirs_state": $("#dirs_states").val()},
+                        success: function (data) {
+                            if (data == '1') {
+                                loadData();
+                            } else {
+                                alert("错误：该行已存在");
+                            }
+                        }
+                    });
 
-            }else{
-                alert("编码长度不能少于2位");
-            }
+                }else{
+                    alert("编码长度不能少于2位");
+                }
             }else{
                 alert("名称长度不能少于2位");
             }
@@ -85,7 +85,7 @@
 
         function loadData() {
             $.ajax({
-                url: "dirs/findAll",
+                url: "/dirs/findAll",
                 type: 'GET',
                 datatype: "JSON",
                 success: function (data) {
@@ -100,13 +100,13 @@
             });
         }
     </script>
-<script src="../static/js/nsw.pc.min.js"></script>
+<script src="../../static/js/nsw.pc.min.js"></script>
 </head>
 <body>
     <div class="header">
         <div class="container">
             <h1>
-                <img src="../static/images/logo.png" alt="" />
+                <img src="../../static/images/logo.png" alt="" />
             </h1>
             <h2>图片素材网站<br />后台管理系统</h2>
             <span>管理员：<a href="" class="name">李四</a> |  <a href="" class="tuichu">【退出】</a><br />
@@ -412,8 +412,8 @@
             <div class="dy10">
                 <div class="bread_tit">当前位置 | 系统设置 > 分类管理</div>
                 <a onclick="sava()" class="xzzd">新增字典+</a>
-                <div class="jsmc">字典名称: <input type="text" id="dirs_name" /></div>
-                <div class="jsfz">字典编码: <input type="text" id="dirs_states" /></div>
+                <div class="jsmc">字典名称: <input id="dirs_name" type="text" /></div>
+                <div class="jsfz">字典编码: <input id="dirs_states" type="text" /></div>
                 <a class="sousuo1"  href="">搜索</a>
                 <div class="row" id="zidian">
                     <table>
@@ -431,9 +431,9 @@
                                 <td><a href="">编辑</a>   |   <a href="">删除</a></td>
                             </tr>
                             <tr>
-                                <td>CONAN_1997</td>
+                                <td>CONAN_1996</td>
                                 <td>管理员</td>
-                                <td>002</td>
+                                <td>001</td>
                                 <td><a href="">编辑</a>   |   <a href="">删除</a></td>
                             </tr>
                         </tbody>
