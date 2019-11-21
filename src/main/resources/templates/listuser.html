@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .jk a:hover{color: red;}
+        .jk a{width: 200px;
+            height: 200px;
+            background-color: white;
+            border: black 1px;
+            text-decoration: none;
+        }
+    </style>
+
+</head>
+<body style="background-color: beige">
+
+<div   style="width:600px;margin:20px auto;text-align: center; float: left" >
+    <form action="selectUser" method="get">
+        查询id：<input name="imagename" >
+        <button type="submit">查询</button>
+    </form>
+    <table align='center' border='1' cellspacing='0'>
+        <tr>
+            <td>全部</td>
+            <td>多元背景</td>
+            <td>唯美人像</td>
+            <td>创意插画</td>
+            <td>免扣png</td>
+        </tr>
+
+        <tr>
+            <td>图片名称</td>
+            <td>图片大小</td>
+            <td>下载时间</td>
+            <td>id</td>
+            <td>作者名字</td>
+            <td>编辑</td>
+            <td>删除</td>
+        </tr>
+        <tr th:each="c:${pages.list}">
+            <td th:text="${c.imagename}">1</td>
+            <td th:text="${c.imagesize}">name</td>
+            <td th:text="${c.imagetime}">name</td>
+            <td th:text="${c.id}">name</td>
+            <td th:text="${c.name}">name</td>
+            <td><a th:href="@{/findUser(id=${c.id})}">编辑</a></td>
+            <td><a th:href="@{/deleteUser(id=${c.id})}">删除</a></td>
+        </tr>
+    </table>
+    <br/>
+    <div class="jk">
+        <a th:href="@{/listUser(start=0)}" style="width:200px;height: 200px;background-color:white" >首页</a>
+        <a th:href="@{/listUser(start=${pages.pageNum-1})}">[上一页]</a>
+        <a th:href="@{/listUser(start=${pages.pageNum+1})}">[下一页]</a>
+        <a th:href="@{/listUser(start=${pages.pages})}">[末  页]</a>
+    </div>
+    <div th:fragment="content" style="width:600px;margin:20px auto;text-align: center; float: right">
+        <table>
+            <tr>
+                <td>图片名称</td>
+                <td>图片大小</td>
+                <td>下载时间</td>
+                <td>id</td>
+                <td>作者名字</td>
+            </tr>
+            <tr th:each="c:${pagess.list}">
+                <td th:text="${c.imagename}"></td>
+                <td th:text="${c.imagesize}"></td>
+                <td th:text="${c.imagetime}"></td>
+                <td th:text="${c.id}"></td>
+                <td th:text="${c.name}"></td>
+            </tr>
+        </table>
+    </div>
+    <br/>
+    <form action="addUser" method="post">
+
+        图片名称: <input name="imagename" /><br/>
+        <!--图片大小:<input name="imagesize"><br/>-->
+        <!--下载时间:<input name="imagetime"><br>-->
+        id:<input name="id"><br>
+        作者名字:<input name="name">
+        <button type="submit">添加</button>
+
+    </form>
+</div>
+
+</body>
+</html>
