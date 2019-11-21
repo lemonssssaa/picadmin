@@ -1,11 +1,9 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   application:
     name:classdemo
-  main:
-    allow-bean-definition-overriding: true
   datasource:
     username: root
     password: 123456
@@ -15,26 +13,3 @@ spring:
 mybatis:
   mapper-locations: classpath*:mapping/*.xml
   type-aliases-package: com.nsw.dirs
-
-  thymeleaf:
-    mode: html5
-    encoding: utf-8
-    cache: false
-
-
-  jpa:
-    show-sql: false
-    hibernate:
-      ddl-auto: update
-
-  servlet:
-    multipart:
-      enabled: true
-      max-file-size: 10485760
-      max-request-size: 10485760
-      file-size-threshold: 0
-      resolve-lazily: false
-
-  devtools:
-    restart:
-      enabled: true

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST">
+    <span>登录</span>
+
+    <div data-validate="请输入用户名">
+        用户名:<input type="text" name="username" placeholder="请输入用户名" autocomplete="off">
+    </div>
+
+    <div data-validate="请输入密码">
+        密码:<input type="password" name="password" placeholder="请输入密码">
+    </div>
+
+    <div>
+        <button type="submit">登 录</button>
+    </div>
+
+    <div>
+        <a href="/register">立即注册</a>
+    </div>
+</form>
+</body>
+</html>
