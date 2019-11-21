@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>图片列表</title>
+</head>
+<body>
+图片列表
+<div>
+    <ul>
+        <li th:each="Shipin:${Shipins}">
+            <p>ID:<span th:text="${Shipin.id}"></span><a href="/edit">修改专辑</a></p>
+            <p>图片url======<span th:text="${Shipin.url}"></span></p>
+            <p>专辑:<sanp th:text="${Shipin.zhuanji}"></sanp></p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
