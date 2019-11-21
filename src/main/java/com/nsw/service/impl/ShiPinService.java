@@ -1,4 +1,4 @@
-package com.nsw.service;
+package com.nsw.service.impl;
 
 import com.nsw.dao.ShiPinDao;
 import com.nsw.dirs.Shipin;

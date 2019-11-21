@@ -1,11 +1,8 @@
-package com.nsw.service;
+package com.nsw.service.impl;
 
-import com.nsw.dao.UserMapper;
-import com.nsw.dirs.User;
+import com.nsw.maper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserService{

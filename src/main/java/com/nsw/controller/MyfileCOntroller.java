@@ -1,7 +1,7 @@
 package com.nsw.controller;
 
 import com.nsw.dirs.Shipin;
-import com.nsw.service.ShiPinService;
+import com.nsw.service.impl.ShiPinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

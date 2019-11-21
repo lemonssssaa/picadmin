@@ -1,4 +1,4 @@
-package com.nsw.dao;
+package com.nsw.maper;
 
 import com.nsw.dirs.User;
 import org.apache.ibatis.annotations.Insert;
