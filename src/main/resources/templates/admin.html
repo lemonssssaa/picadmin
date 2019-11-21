@@ -9,9 +9,11 @@
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
     </script>
     <script type="text/javascript">
+        var name=$("#dirs_name").val().length;
+        var state=$("#dirs_states").val().length;
         function updata(ap) {
-            if ($("#dirs_name").val().length>2) {
-                if ($("#dirs_states").val().length>2){
+            if (6>name>2) {
+                if (6>state>2){
                     $.ajax({
                         url: "dirs/updata",
                         type: "GET",
@@ -26,10 +28,10 @@
                         }
                     });
                 }else{
-                    alert("编码长度不能少于2位");
+                    alert("编码长度不能多余8位或者少于2位");
                 }
             }else{
-                alert("名称长度不能少于2位");
+                alert("名称长度不能多余12位或者少于2位");
             }
         }
 
