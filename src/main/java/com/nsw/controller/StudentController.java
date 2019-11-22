@@ -36,4 +36,5 @@ public class StudentController {
         List<Student> list=studentService.findSelect(keyword);
         return JSONObject.toJSONString(list);
     }
+
 }

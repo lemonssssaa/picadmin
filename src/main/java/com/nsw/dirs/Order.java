@@ -3,10 +3,7 @@ package com.nsw.dirs;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
