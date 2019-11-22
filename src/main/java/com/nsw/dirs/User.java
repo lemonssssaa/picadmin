@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import java.sql.Date;
+
 @Data
 public class User {
 

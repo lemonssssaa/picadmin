@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" href="css/upload.css">
 	<script type="text/javascript" src="js/JQuery.js"></script>
 	<script type="text/javascript" src="js/jquery.SuperSlide.2.1.3.js"></script>
+
+
 </head>
 <body>
 <!-- 头部 -->
 <div class="header">
 	<div class="content clearfix">
-		<h1 class="h_lt"><a href=""><img src="images/logo.png" alt=""></a></h1>
+		<h1 class="h_lt"><a href=""><img src="images/logo3.png" alt=""></a></h1>
 		<ul class="h_ct">
 			<li><a href="">首页</a></li>
 			<li><a href="">多元背景</a></li>
@@ -282,56 +285,8 @@
 					<li>创意插画</li>
 					<li>免抠PNG</li>
 				</div>
-				<div class="bd" >
-					<div class="allphoto" th:fragment="content"><!--全部图片-->
-						<p  action="selectUser" method="get">
-
-							<input type="button" value="下载时间">
-
-
-							<input type="text" placeholder="关键词" name="id"  >
-							<input type="submit">
-
-						</p>
-						<ul>
-							<li>图片信息</li>
-							<li>下载时间</li>
-							<li>下载方式</li>
-						</ul>
-						<div class="tu1" th:each="c:${pages.list}">
-							<i th:text="${c.pt}"><img src="images/tp1.jpg" alt=""></i>
-							<p class="one" >
-								<em th:text="${c.imagename}"> </em>
-
-								<em th:text="${c.id}">编号：123 高清：100*100</em>
-								<em th:text="${c.name}">作者：我</em>
-							</p>
-							<p class="two" th:text="${c.imagetime}">2019-10-10</p>
-							<p>
-								<em>每日免费下载</em>
-								<em>VIP下载</em>
-
-
-							</p>
-
-						</div>
-
-						<div class="tu1">
-							<i><img src="images/tp1.jpg" alt=""></i>
-							<p class="one">
-								<em >群山风景 大小：5kb</em>
-								<em >编号：123 高清：100*100</em>
-								<em >作者：我</em>
-							</p>
-							<p class="two" >2019-10-10</p>
-							<p>
-								<em>每日免费下载</em>
-								<em>VIP下载</em>
-							</p>
-						</div>
-					</div>
-					<div class="allphoto" th:fragment="content" >
-						<!--多元背景-->
+				<div class="bd">
+					<div class="allphoto">
 						<p>
 							<input type="button" value="下载时间">
 							<input type="text" placeholder="关键词">
@@ -342,14 +297,14 @@
 							<li>下载时间</li>
 							<li>下载方式</li>
 						</ul>
-						<div class="tu1" th:each="c:${dybj.list}">
+						<div class="tu1">
 							<i><img src="images/tp1.jpg" alt=""></i>
-							<p class="one" >
-								<em  th:text="${c.imagename}">群山风景 大小：5kb</em>
-								<em  th:text="${c.id}">编号：123 高清：100*100</em>
-								<em  th:text="${c.name}">作者：我</em>
+							<p class="one">
+								<em>群山风景 大小：5kb</em>
+								<em>编号：123 高清：100*100</em>
+								<em>作者：我</em>
 							</p>
-							<p class="two"  th:text="${c.imagetime}">2019-10-10</p>
+							<p class="two">2019-10-10</p>
 							<p>
 								<em>每日免费下载</em>
 								<em>VIP下载</em>
@@ -369,8 +324,7 @@
 							</p>
 						</div>
 					</div>
-					<div class="allphoto"  >
-						<!--唯美人像-->
+					<div class="allphoto">
 						<p>
 							<input type="button" value="下载时间">
 							<input type="text" placeholder="关键词">
@@ -381,14 +335,14 @@
 							<li>下载时间</li>
 							<li>下载方式</li>
 						</ul>
-						<div class="tu1" th:each="c:${wmrx.list}">
+						<div class="tu1">
 							<i><img src="images/tp1.jpg" alt=""></i>
 							<p class="one">
-								<em th:text="${c.imagename}">群山风景 大小：5kb</em>
-								<em th:text="${c.id}">编号：123 高清：100*100</em>
-								<em th:text="${c.name}">作者：我</em>
+								<em>群山风景 大小：5kb</em>
+								<em>编号：123 高清：100*100</em>
+								<em>作者：我</em>
 							</p>
-							<p class="two" th:text="${c.imagetime}" >2019-10-10</p>
+							<p class="two">2019-10-10</p>
 							<p>
 								<em>每日免费下载</em>
 								<em>VIP下载</em>
@@ -408,8 +362,7 @@
 							</p>
 						</div>
 					</div>
-					<div class="allphoto"  >
-						<!--创意插画-->
+					<div class="allphoto">
 						<p>
 							<input type="button" value="下载时间">
 							<input type="text" placeholder="关键词">
@@ -420,14 +373,14 @@
 							<li>下载时间</li>
 							<li>下载方式</li>
 						</ul>
-						<div class="tu1" th:each="c:${cych.list}">
+						<div class="tu1">
 							<i><img src="images/tp1.jpg" alt=""></i>
 							<p class="one">
-								<em th:text="${c.imagename}">群山风景 大小：5kb</em>
-								<em th:text="${c.id}">编号：123 高清：100*100</em>
-								<em th:text="${c.name}">作者：我</em>
+								<em>群山风景 大小：5kb</em>
+								<em>编号：123 高清：100*100</em>
+								<em>作者：我</em>
 							</p>
-							<p class="two" th:text="${c.imagetime}" >2019-10-10</p>
+							<p class="two">2019-10-10</p>
 							<p>
 								<em>每日免费下载</em>
 								<em>VIP下载</em>
@@ -447,8 +400,7 @@
 							</p>
 						</div>
 					</div>
-					<div class="allphoto" >
-						<!--免扣png-->
+					<div class="allphoto">
 						<p>
 							<input type="button" value="下载时间">
 							<input type="text" placeholder="关键词">
@@ -459,14 +411,52 @@
 							<li>下载时间</li>
 							<li>下载方式</li>
 						</ul>
-						<div class="tu1" th:each="c:${mkpng.list}">
+						<div class="tu1">
 							<i><img src="images/tp1.jpg" alt=""></i>
 							<p class="one">
-								<em th:text="${c.imagename}">群山风景 大小：5kb</em>
-								<em th:text="${c.id}" >编号：123 高清：100*100</em>
-								<em th:text="${c.name}">作者：我</em>
+								<em>群山风景 大小：5kb</em>
+								<em>编号：123 高清：100*100</em>
+								<em>作者：我</em>
 							</p>
-							<p class="two" th:text="${c.imagetime}">2019-10-10</p>
+							<p class="two">2019-10-10</p>
+							<p>
+								<em>每日免费下载</em>
+								<em>VIP下载</em>
+							</p>
+						</div>
+						<div class="tu1">
+							<i><img src="images/tp1.jpg" alt=""></i>
+							<p class="one">
+								<em>群山风景 大小：5kb</em>
+								<em>编号：123 高清：100*100</em>
+								<em>作者：我</em>
+							</p>
+							<p class="two">2019-10-10</p>
+							<p>
+								<em>每日免费下载</em>
+								<em>VIP下载</em>
+							</p>
+						</div>
+					</div>
+					<div class="allphoto">
+						<p>
+							<input type="button" value="下载时间">
+							<input type="text" placeholder="关键词">
+							<input type="submit">
+						</p>
+						<ul>
+							<li>图片信息</li>
+							<li>下载时间</li>
+							<li>下载方式</li>
+						</ul>
+						<div class="tu1">
+							<i><img src="images/tp1.jpg" alt=""></i>
+							<p class="one">
+								<em>群山风景 大小：5kb</em>
+								<em>编号：123 高清：100*100</em>
+								<em>作者：我</em>
+							</p>
+							<p class="two">2019-10-10</p>
 							<p>
 								<em>每日免费下载</em>
 								<em>VIP下载</em>
@@ -494,25 +484,29 @@
 						trigger:"click",
 					});
 				</script>
-
-
 			</div>
 
 			<div class="wscd">
 				<h3>我上传的</h3>
 				<dl>
 					<dt>
-						<i><input type="button"></i>
-						<em><a href="">查询图片</a></em>
+						<form action="uploadFile" method="post" enctype="multipart/form-data">
+							<i><input type="file" name="fileName" style="width: 150px; height: 150px;"/></i>
+							<em><input type="submit" value="确认上传" style="background-color: #c9c9c9; font-size: 17px; color: #fff;"></em>
+						</form>
+						<form action="/chaxun">
+							<em style="float: left"><a href="/chaxun">查询图片</a></em>
+						</form>
 					</dt>
 					<dd>
+						<form action="/add" method="get">
 						<p>
 							<i>作品名称:</i>
-							<input type="text">
+							<input type="text" name="namee" id="namee" placeholder="作品名称">
 						</p>
 						<p>
 							<i>上传名称:</i>
-							<input type="text">
+							<input type="text" name="input" id="input" placeholder="上传名称">
 						</p>
 						<p>
 							<i>尺寸：</i>
@@ -520,8 +514,8 @@
 							<span><img src="images/cheng.png" alt=""></span>
 							<input type="text" placeholder="高（像素）">
 						</p>
-
-						<em><input type="button" value="确认上传"></em>
+						<em><input type="submit" value="确认上传"></em>
+						</form>
 					</dd>
 				</dl>
 			</div>
@@ -536,8 +530,5 @@
 		trigger:"click",
 	});
 </script>
-
-
-
 </body>
 </html>
