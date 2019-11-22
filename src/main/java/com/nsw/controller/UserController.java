@@ -1,5 +1,7 @@
 package com.nsw.controller;
 
+import com.nsw.dirs.Result;
+import com.nsw.dirs.User;
 import com.nsw.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,21 @@ public class UserController {
             return "上传成功，name===作品名称是" + namee + "\n" +
                     "上传名称是,input===上传名称是" + input;
         }
+    }
+
+    @RequestMapping(value = "/regist")
+    public Result regist(User user){
+        return userService.regist(user);
+    }
+
+    /**
+     * 登录
+     * @param user 参数封装
+     * @return Result
+     */
+    @RequestMapping(value = "/login")
+    public Result login(User user){
+        return userService.login(user);
     }
 
 }

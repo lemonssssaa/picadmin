@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,4 +38,20 @@ public class StudentController {
         return JSONObject.toJSONString(list);
     }
 
+    @RequestMapping("/Blog")
+    public ModelAndView index(){
+        ModelAndView modelAndView = new ModelAndView("index");
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/login")
+    public String dl(){
+        return "login";
+    }
+
+    @RequestMapping("/regist")
+    public String aq(){
+        return "regist";
+    }
 }
