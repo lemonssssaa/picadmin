@@ -9,6 +9,13 @@
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
     </script>
     <script type="text/javascript">
+        $(function () {
+            loadData();
+            // $("#row-tbody-tr").on("click","a",function () {
+            //     $(this).closest("tr").remove();
+            // })
+        });
+
         var name=$("#dirs_name").val().length;
         var state=$("#dirs_states").val().length;
         function updata(ap) {
@@ -77,12 +84,7 @@
 
         }
 
-        $(function () {
-            loadData();
-            // $("#row-tbody-tr").on("click","a",function () {
-            //     $(this).closest("tr").remove();
-            // })
-        });
+
 
         function loadData() {
             $.ajax({
@@ -425,18 +427,7 @@
                             <th>操作</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>CONAN_1996</td>
-                                <td>管理员</td>
-                                <td>001</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
-                            <tr>
-                                <td>CONAN_1996</td>
-                                <td>管理员</td>
-                                <td>001</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>
