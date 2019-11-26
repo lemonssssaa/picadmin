@@ -8,5 +8,5 @@
     </resultMap>
     <select id="findSelect" resultType="com.nsw.dirs.Student" parameterType="string">
         select *from tptp where name like concat('%',#{keyword},'%')
-    </select>
+    </select> n
 </mapper>
