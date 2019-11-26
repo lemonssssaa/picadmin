@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.nsw.dirs.Student;
 import com.nsw.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,16 +27,18 @@ import java.util.List;
 public class StudentController {
     @Autowired
     StudentService studentService;
-    @GetMapping("/findSjk")
-    public String findSjk(){
-        return JSONObject.toJSONString(studentService.findSjk()) ;
 
-    }
     @GetMapping("/findselect")
     public String findSelect(HttpServletRequest request) throws UnsupportedEncodingException {
         request.setCharacterEncoding("utf-8");
         String keyword=request.getParameter("keyword");
-        List<Student> list=studentService.findSelect(keyword);
+        String searche = keyword.replaceAll("%","").replaceAll(" ","");
+        List<Student> list=null;
+        if(!StringUtils.isEmpty(searche)){
+            list =studentService.findSelect(keyword);
+        }else {
+            list = new ArrayList<>();
+        }
         return JSONObject.toJSONString(list);
     }
 

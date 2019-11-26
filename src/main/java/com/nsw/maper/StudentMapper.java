@@ -16,7 +16,6 @@ import java.util.Map;
 @Repository
 @Mapper
 public interface StudentMapper {
-    List<Student> findSjk();
 
     List<Student> findSelect(String name);
 

@@ -12,7 +12,6 @@ import java.util.Map;
  * @Description: todo
  */
 public interface StudentService {
-    List<Student> findSjk();
 
     List<Student> findSelect(String name);
 }

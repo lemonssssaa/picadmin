@@ -24,14 +24,9 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     StudentMapper studentMapper;
 
-    @Override
-    public List<Student> findSjk() {
-        return studentMapper.findSjk();
-    }
 
     @Override
     public List<Student> findSelect(String name) {
-//        name="%"+name+"%";
         return studentMapper.findSelect(name);
     }
 

@@ -6,9 +6,6 @@
                 <result column="name" jdbcType="VARCHAR" property="name"/>
                 <result column="url" jdbcType="VARCHAR" property="url"/>
     </resultMap>
-    <!--    <select id="findSjk" resultMap="studentResultMap">
-           select *from tptp
-       </select>-->
     <select id="findSelect" resultType="com.nsw.dirs.Student" parameterType="string">
         select *from tptp where name like concat('%',#{keyword},'%')
     </select>
