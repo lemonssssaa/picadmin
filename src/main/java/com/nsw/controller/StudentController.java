@@ -32,9 +32,10 @@ public class StudentController {
     public String findSelect(HttpServletRequest request) throws UnsupportedEncodingException {
         request.setCharacterEncoding("utf-8");
         String keyword=request.getParameter("keyword");
-        String searche = keyword.replaceAll("%","").replaceAll(" ","");
+        String searChe = keyword.replaceAll("%","").replaceAll(" ","")
+                .replaceAll("_","");
         List<Student> list=null;
-        if(!StringUtils.isEmpty(searche)){
+        if(!StringUtils.isEmpty(searChe)){
             list =studentService.findSelect(keyword);
         }else {
             list = new ArrayList<>();

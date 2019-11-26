@@ -1,11 +1,10 @@
-package com.nsw.maper;
+package com.nsw.mapper;
 
 import com.nsw.dirs.Student;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author WengQiZhi

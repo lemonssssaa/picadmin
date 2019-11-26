@@ -1,6 +1,7 @@
 package com.nsw.controller;
 
-import com.nsw.maper.OrderMapper;
+import com.nsw.dirs.User;
+import com.nsw.mapper.OrderMapper;
 import com.nsw.dirs.Order;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

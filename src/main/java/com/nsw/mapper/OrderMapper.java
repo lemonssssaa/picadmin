@@ -1,9 +1,8 @@
-package com.nsw.maper;
+package com.nsw.mapper;
 
 import com.nsw.dirs.Order;
 import org.apache.ibatis.annotations.*;
 
-import java.util.Date;
 import java.util.List;
 
 @Mapper
