@@ -1,11 +1,10 @@
-package com.nsw.maper;
+package com.nsw.mapper;
 
 import com.nsw.dirs.Student;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author WengQiZhi
@@ -17,6 +16,6 @@ import java.util.Map;
 @Mapper
 public interface StudentMapper {
 
-    List<Student> findSelect(String name);
+    List<Student> fuzzySelect(String name);
 
 }

@@ -1,4 +1,4 @@
-package com.nsw.maper;
+package com.nsw.mapper;
 
 import com.nsw.dirs.Order;
 import org.apache.ibatis.annotations.One;

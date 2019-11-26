@@ -2,7 +2,7 @@ package com.nsw.service.impl;
 
 import com.nsw.dirs.Result;
 import com.nsw.dirs.User;
-import com.nsw.maper.UserMapper;
+import com.nsw.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

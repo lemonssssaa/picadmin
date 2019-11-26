@@ -13,5 +13,5 @@ import java.util.Map;
  */
 public interface StudentService {
 
-    List<Student> findSelect(String name);
+    List<Student> fuzzySelect(String name);
 }
