@@ -20,8 +20,8 @@ public class StudentServiceImpl implements StudentService {
     StudentMapper studentMapper;
 
     @Override
-    public List<Student> findSelect(String name) {
-        return studentMapper.findSelect(name);
+    public List<Student> fuzzySelect(String name) {
+        return studentMapper.fuzzySelect(name);
     }
 
 

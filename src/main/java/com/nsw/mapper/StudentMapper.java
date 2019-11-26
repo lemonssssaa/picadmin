@@ -16,6 +16,6 @@ import java.util.List;
 @Mapper
 public interface StudentMapper {
 
-    List<Student> findSelect(String name);
+    List<Student> fuzzySelect(String name);
 
 }

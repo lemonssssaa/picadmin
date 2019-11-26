@@ -28,7 +28,7 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @GetMapping("/findselect")
+    @GetMapping("/fuzzySelect")
     public String findSelect(HttpServletRequest request) throws UnsupportedEncodingException {
         request.setCharacterEncoding("utf-8");
         String keyword=request.getParameter("keyword");
@@ -36,7 +36,7 @@ public class StudentController {
                 .replaceAll("_","");
         List<Student> list=null;
         if(!StringUtils.isEmpty(searChe)){
-            list =studentService.findSelect(keyword);
+            list =studentService.fuzzySelect(keyword);
         }else {
             list = new ArrayList<>();
         }
