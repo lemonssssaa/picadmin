@@ -1,486 +1,757 @@
-
 <!DOCTYPE html>
-<html xmlns:th = "http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Document</title>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <link rel="stylesheet" href="../static/css/animate.min.css">
+    <link rel="stylesheet" href="../static/css/resetcommon.css">
+    <link rel="stylesheet" href="../static/css/index.css">
+    <!--    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smooth  ness/jquery-ui.css">-->
+    <link rel="stylesheet" href="../static/css/sskstyle.css">
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <link rel="stylesheet" href="css/animate.min.css">
-    <link rel="stylesheet" href="css/resetcommon.css">
-    <link rel="stylesheet" href="css/index.css">
-    <script src="js/jquery1.42.min.js"></script>
-    <script src="js/jquery.SuperSlide.2.1.3.source.js"></script>
-    <script src="js/wow.min.js"></script>
-    <style type="text/css">
-        #search{
-            display: none;
-            position: absolute;
-            top: 70px;
-            left: 118px;
-            width: 360px;
-            height: 190px;
-            border-radius: 3px;
-            border: 1px #F6821F solid;
-            background: white;
-            opacity:.9;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-    </style>
+    <script src="../static/js/jquery.SuperSlide.2.1.3.source.js"></script>
+    <script src="../static/js/wow.min.js"></script>
+    <script type="text/javascript">
+        $( function() {
+            $("#keyword").autocomplete({
+                minLength:0,
+                source: function(request, response) {
+                    var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+                    var tags =[] ;
+                    var keyword = $("#keyword").val().trim();
+                    $.ajax({
+                        type : "GET",
+                        url : "stu/findselect",
+                        dataType : "json",
+                        data : {
+                            keyword : keyword
+                        },
+                        success : function(json) {
+                            $.map(json, function(item) {
+                                tags.push(item.name);
+                            })
+                            response( $.grep( tags, function(item){
+                                return matcher.test(item);
+                            }) );
+                            if(tags.length<=0){
+                                $("#ui-id-1").attr("style","top: 493px;left: 581px;width: 358px;display:none");
+                            }else {
+                                $("#ui-id-1").attr("style","top: 493px;left: 581px;width: 358px;");
+                            }
+                        }
+                    });
+                }
+            });
+            $("#keyword").focus(function () {
+                var kw=$("#keyword").val().trim();
+                if(kw==""){
+                    $("#ui-id-1").attr("style","top: 493px;left: 581px;width: 358px;display:none").empty();
+                }else {
+                    $("#ui-id-1").show();
+                }
+            })
+        });
+    </script>
 </head>
 <body>
-    <div class="top">
-        <h1><a href="javascript:;"><img src="images/LOGO.png"><span>牛商网</span></a></h1>
-        <div class="chaolj">
-            <ul class="sd1">
-                <li><a href="javascript:;">首页</a></li>
-                <li><a href="javascript:;">多元背景</a></li>
-                <li><a href="javascript:;">唯美人像</a></li>
-                <li><a href="javascript:;">创意插画 </a></li>
-                <li><a href="javascript:;">免扣png</a></li>
-            </ul>
-            <div th:if="${user} eq null" class="denglu">
-                <a href="/register.html" style="margin-left:30px;position: absolute;top: 0">注册</a>
-                <a href="/login.html" style="margin-left:30px;position: absolute;top: 0;left: 63px">登录</a>
-            </div>
-            <div class="denglu" th:if="${user} ne null">
-                <a href="javascript:;">
-                <i th:if="${user.is_grade == 0}">开通VIP</i>
+<div class="top">
+    <h1><a href="javascript:;"><img src="../static/images/LOGO.png"><span>牛商网</span></a></h1>
+    <div class="chaolj">
+        <ul class="sd1">
+            <li><a href="javascript:;">首页</a></li>
+            <li><a href="javascript:;">多元背景</a></li>
+            <li><a href="javascript:;">唯美人像</a></li>
+            <li><a href="javascript:;">创意插画 </a></li>
+            <li><a href="javascript:;">免扣png</a></li>
+        </ul>
+        <div class="denglu">
+            <a href="javascript:;">
+                <i>开通VIP</i>
                 <div class="xialailb">
-                    <em><a  th:text="${user.getUser_name()}" style="overflow: hidden"></a>
-                    <div class="dengl">
-                        <ul>
-                            <li><a href="javascript:;">我的订单</a></li>
-                            <li><a href="javascript:;">我的套餐</a></li>
-                            <li><a href="javascript:;">我的收藏</a></li>
-                            <li><a href="javascript:;">我要上传</a></li>
-                            <li><a href="/particulars">账户管理</a></li>
-                            <li><a href="/logout">退出</a></li>
-                        </ul>
-                    </div>
+                    <em>登录
+                        <div class="dengl">
+                            <ul>
+                                <li><a href="javascript:;">我的订单</a></li>
+                                <li><a href="javascript:;">我的套餐</a></li>
+                                <li><a href="javascript:;">我的收藏</a></li>
+                                <li><a href="javascript:;">我要上传</a></li>
+                                <li><a href="javascript:;">账户管理</a></li>
+                                <li><a href="javascript:;">退出</a></li>
+                            </ul>
+                        </div>
                     </em>
                 </div>
-                </a>
-            </div>
+            </a>
         </div>
     </div>
-    <div class="rts">
-         <div id="slideBox" class="slideBox">
-            <div class="bd bd1">
-                <ul>
-                    <li style="display: block;">
-                        <img src="images/banner.png" >
-                    </li>
-                    <li style="display: list-item;">
-                        <img src="images/banner2.jpg">
-                    </li>
-                    <li>
-                        <img src="images/banner3.jpg">
-                    </li>
-                </ul>
-            </div>
-            <div class="hd hd1">
-                <ul>
-                    <li class="on"></li>
-                    <li class=""></li>
-                    <li class=""></li>
-                </ul>
-            </div>
-            <a class="prev" href="javascript:void(0)"></a>
-            <a class="next" href="javascript:void(0)"></a>
-    </div>
-    </div>
-    <div class="ssk">
-        <input type="text" placeholder="请输入内容" id="keyword" name="keyword">
-        <div class="sstb">
-            <a href="javascript:;"><img src="images/Search box.png" alt=""></a>
-        </div>
-        <div class="gduo">
-            <select>
-                <option>更多</option>
-                <option>Saab</option>
-                <option>Mercedes</option>
-                <option>Audi</option>
-            </select>
-        </div>
-        <div id="search">
-        <ul id="content_ul">
-
-        </ul>
-    </div>
-    </div>
-    <div class="toy">
-        <a href="javascript:;"><h2>潮流综合</h2></a>
-    </div>
-    <div class="select">
-        <a href="javascript:;">最新上传</a>
-        <a href="javascript:;">今日热门</a>
-        <a href="javascript:;">精选专辑</a>
-        <a href="javascript:;">最高浏览</a>
-    </div>
-    <div class="cptp">
-        <ul>
-            <li><a href="javascript:;"><img src="images/duoyuan-bj4.png"><span>霜降 · 照片</span>
-                <div class="yy">
-                    <div class="web">
-                        <i>霜降 · 照片</i>
-                        <em>霜降 节气 摄影图</em>
-                    </div>
-                </div>
-            </a></li>
-            <li><a href="javascript:;"><img src="images/zuixin-tp2.png"><span>万圣节 · 照片</span>
-                <div class="yy">
-                    <div class="web">
-                        <i>万圣节 · 照片</i>
-                        <em>万圣节 摄影图</em>
-                    </div>
-                </div>
-            </a></li>
-            <li><a href="javascript:;"><img src="images/zuixin-tp3.png"><span>大米 · 食物</span>
-                <div class="yy">
-                    <div class="web">
-                        <i>大米 · 食物</i>
-                        <em>大米 摄影图</em>
-                    </div>
-                </div>
-            </a></li>
-            <li><a href="javascript:;"><img src="images/zuixin-tp4.png"><span>杂粮米 · 食物</span>
-                <div class="yy">
-                    <div class="web">
-                        <i>杂粮米 · 食物</i>
-                        <em>杂粮米 摄影图</em>
-                    </div>
-                </div>
-            </a></li>
-            <li><a href="javascript:;"><img src="images/zuixin-tp5.png"><span>红辣椒 · 食物</span>
-                <div class="yy">
-                    <div class="web">
-                        <i>红辣椒 · 食物</i>
-                        <em>红辣椒 摄影图</em>
-                    </div>
-                </div>
-            </a></li>
-            <li><a href="javascript:;"><img src="images/zuixin-tp6.png"><span>万圣节 · 插画</span>
-                <div class="yy">
-                    <div class="web">
-                        <i>万圣节 · 插画</i>
-                        <em>万圣节 摄影图</em>
-                    </div>
-                </div>
-            </a></li>
-            <li><a href="javascript:;"><img src="images/zuixin-tp7.png"><span>五谷丰登 · 新年</span>
-                <div class="yy">
-                    <div class="web">
-                        <i>五谷丰登 · 新年</i>
-                        <em>五谷丰登 摄影图</em>
-                    </div>
-                </div>
-            </a></li>
-            <li><a href="javascript:;"><img src="images/zuixin-tp8.png"><span>万圣节城堡 · 插画</span>
-                <div class="yy">
-                    <div class="web">
-                        <i>万圣节城堡 · 插画</i>
-                        <em>万圣节城堡 摄影图</em>
-                    </div>
-                </div>
-            </a></li>
-        </ul>
-    </div>
-    <div class="btn">
-        <a href="javascript:;">查看更多</a>
-    </div>
-    <div class="toy2">
-        <a href="javascript:;"><h2>优选图片</h2></a>
-    </div>
-    <div class="select2">
-        <a href="javascript:;">多元背景</a>
-        <a href="javascript:;">唯美人像</a>
-        <a href="javascript:;">创意插画</a>
-        <a href="javascript:;">免抠png</a>
-    </div>
-    <div class="ytp">
-        <ul>
-            <li><a href="javascript:;"><img src="images/tp1.png"></a>
-                <div class="mei">
-                    <div class="bj">
-                        <span>人像  |  美女</span>
-                        <em>CONAN_1996</em>
-                    </div>
-                    <div class="xia">
-                        <a href="javascript:;"><img src="images/xiazai.png"></a>
-                        <a href="javascript:;"><img src="images/shouc.png"></a>
-                    </div>
-                </div>
-            </li>
-            <li><a href="javascript:;"><img src="images/tp2.png"></a>
-                <div class="mei">
-                    <div class="bj">
-                        <span>人像  |  美女</span>
-                        <em>CONAN_1996</em>
-                    </div>
-                    <div class="xia">
-                        <a href="javascript:;"><img src="images/xiazai.png"></a>
-                        <a href="javascript:;"><img src="images/shouc.png"></a>
-                    </div>
-                </div>
-            </li>
-                            <li><a href="javascript:;"><img src="images/tp3.png"></a>
-                                <div class="mei">
-                                    <div class="bj">
-                                      <span>人像  |  美女</span>
-                                        <em>CONAN_1996</em>
-                                    </div>
-                                    <div class="xia">
-                                        <a href="javascript:;"><img src="images/xiazai.png"></a>
-                                        <a href="javascript:;"><img src="images/shouc.png"></a>
-                                    </div>
-                                </div>
-                            </li>
-                    <li><a href="javascript:;"><img src="images/tp4.png"></a>
-                        <div class="mei">
-                            <div class="bj">
-                              <span>人像  |  美女</span>
-                                <em>CONAN_1996</em>
-                            </div>
-                            <div class="xia">
-                                <a href="javascript:;"><img src="images/xiazai.png"></a>
-                                <a href="javascript:;"><img src="images/shouc.png"></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="javascript:;"><img src="images/tp5.png"></a>
-                        <div class="mei">
-                            <div class="bj">
-                              <span>人像  |  美女</span>
-                                <em>CONAN_1996</em>
-                            </div>
-                            <div class="xia">
-                                <a href="javascript:;"><img src="images/xiazai.png"></a>
-                                <a href="javascript:;"><img src="images/shouc.png"></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="javascript:;"><img src="images/tp6.png"></a>
-                        <div class="mei">
-                            <div class="bj">
-                              <span>人像  |  美女</span>
-                                <em>CONAN_1996</em>
-                            </div>
-                            <div class="xia">
-                                <a href="javascript:;"><img src="images/xiazai.png"></a>
-                                <a href="javascript:;"><img src="images/shouc.png"></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="javascript:;"><img src="images/tp7.png"></a>
-                        <div class="mei">
-                            <div class="bj">
-                              <span>人像  |  美女</span>
-                                <em>CONAN_1996</em>
-                            </div>
-                            <div class="xia">
-                                <a href="javascript:;"><img src="images/xiazai.png"></a>
-                                <a href="javascript:;"><img src="images/shouc.png"></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="javascript:;"><img src="images/tp7.7.png"></a>
-                        <div class="mei">
-                            <div class="bj">
-                              <span>人像  |  美女</span>
-                                <em>CONAN_1996</em>
-                            </div>
-                            <div class="xia">
-                                <a href="javascript:;"><img src="images/xiazai.png"></a>
-                                <a href="javascript:;"><img src="images/shouc.png"></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="javascript:;"><img src="images/tp8.png"></a>
-                        <div class="mei">
-                            <div class="bj">
-                              <span>人像  |  美女</span>
-                                <em>CONAN_1996</em>
-                            </div>
-                  <div class="xia">
-                      <a href="javascript:;"><img src="images/xiazai.png"></a>
-                      <a href="javascript:;"><img src="images/shouc.png"></a>
-                  </div>
-              </div>
+</div>
+<div class="rts">
+    <div id="slideBox" class="slideBox">
+        <div class="bd bd1">
+            <ul>
+                <li style="display: block;">
+                    <img src="../static/images/banner.png" >
                 </li>
-                </ul>
-            </div>
-    <div class="btn2">
-        <h3>海量高清图等你来发现</h3>
-        <a href="javascript:;">发现更多</a>
+                <li style="display: list-item;">
+                    <img src="../static/images/banner2.jpg">
+                </li>
+                <li>
+                    <img src="../static/images/banner3.jpg">
+                </li>
+            </ul>
+        </div>
+        <div class="hd hd1">
+            <ul>
+                <li class="on"></li>
+                <li class=""></li>
+                <li class=""></li>
+            </ul>
+        </div>
+
+        <a class="prev" href="javascript:void(0)"></a>
+        <a class="next" href="javascript:void(0)"></a>
     </div>
-    <div class="KaiTongHuiYuan">
-        <div class="yic">
-                 <a href="javascript:;">查看详情</a>
+</div>
+<div class="ssk" id="ssk">
+    <input type="text" placeholder="请输入内容" id="keyword" name="keyword">
+    <div class="sstb">
+        <a href="javascript:;"><img src="../static/images/Search box.png" alt=""></a>
+    </div>
+    <div class="gduo">
+        <select>
+            <option>更多</option>
+            <option>Saab</option>
+            <option>Mercedes</option>
+            <option>Audi</option>
+        </select>
+    </div>
+</div>
+<div class="toy">
+    <a href="javascript:;"><h2>潮流综合</h2></a>
+</div>
+<div class="select">
+    <a href="javascript:;">最新上传</a>
+    <a href="javascript:;">今日热门</a>
+    <a href="javascript:;">精选专辑</a>
+    <a href="javascript:;">最高浏览</a>
+</div>
+<div class="cptp">
+    <ul>
+        <li><a href="javascript:;"><img src="../static/images/duoyuan-bj4.png"><span>霜降 · 照片</span>
+            <div class="yy">
+                <div class="web">
+                    <i>霜降 · 照片</i>
+                    <em>霜降 节气 摄影图</em>
+                </div>
             </div>
-          <div class="huiyuan">
-            <h3>开通会员，享受超值套餐</h3>
-              <div class="vip">
-          <h4>高质量图库，超低价格</h4>
-           </div>
+        </a></li>
+        <li><a href="javascript:;"><img src="../static/images/zuixin-tp2.png"><span>万圣节 · 照片</span>
+            <div class="yy">
+                <div class="web">
+                    <i>万圣节 · 照片</i>
+                    <em>万圣节 摄影图</em>
+                </div>
             </div>
-        </div>
-            <div class="mfe">
-                <a href="javascript:;"><h2>注册获得每周免费图片</a>
-                    <i>FREE PICTURES</i>
-                       <a href="javascript:;"><span>查看更多+</span></a> 
-                </h2>
-            <div class="mfetp">
-                <ul>
-                    <li><a href="javascript:;"><img src="images/mf1.png"></a></li>
-                    <li><a href="javascript:;"><img src="images/mf2.png"></a></li>
-                    <li><a href="javascript:;"><img src="images/mf3.png"></a></li>
-                </ul>
+        </a></li>
+        <li><a href="javascript:;"><img src="../static/images/zuixin-tp3.png"><span>大米 · 食物</span>
+            <div class="yy">
+                <div class="web">
+                    <i>大米 · 食物</i>
+                    <em>大米 摄影图</em>
+                </div>
             </div>
-        </div>
-        <div class="dixian">
-            <h3>我可是有底线的哦</h3>
-        </div>
-        <div class="finish">
-            <div class="finish_logo">
-                <a href="javascript:;"><img src="images/LOGO2.png"/>
-                    <span>助力全国中小企业成长</span></a>
+        </a></li>
+        <li><a href="javascript:;"><img src="../static/images/zuixin-tp4.png"><span>杂粮米 · 食物</span>
+            <div class="yy">
+                <div class="web">
+                    <i>杂粮米 · 食物</i>
+                    <em>杂粮米 摄影图</em>
+                </div>
             </div>
-              <div class="youqinglj">
-                <ul>
-                    <li><strong>关于我们</strong>
-                     <a href="javascript:;">关于我们</a>
-                     <a href="javascript:;">加入我们</a>
-                     <a href="javascript:;">帮助中心</a>
-                     <a href="javascript:;">服务条款</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li><strong>VIP服务</strong>
-                     <a href="javascript:;">个人VIP</a>
-                     <a href="javascript:;">购买套餐</a>
-                     <a href="javascript:;">服务选择</a>
-                     <a href="javascript:;">服务范围</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li><strong>了解更多</strong>
-                     <a href="javascript:;">授权协议</a>
-                     <a href="javascript:;">使用条款</a>
-                     <a href="javascript:;">隐私政策</a>
-                    </li>
-                </ul>
+        </a></li>
+        <li><a href="javascript:;"><img src="../static/images/zuixin-tp5.png"><span>红辣椒 · 食物</span>
+            <div class="yy">
+                <div class="web">
+                    <i>红辣椒 · 食物</i>
+                    <em>红辣椒 摄影图</em>
+                </div>
             </div>
-          <div class="gongzhao"> 
-            <img src="images/wx.png"/>
-            <img src="images/qq.png"/>
-          </div>
-           <div class="kefu">
-               <span>客服中心</span>
-                <i>4000-333-087</i>
-                 <a href="javascript:;">在线客服</a>
-           </div>
-           <div class="db">
-               <span>© 2019 长沙市牛商网络股份有限公司</span>
-           </div>
-        </div>
+        </a></li>
+        <li><a href="javascript:;"><img src="../static/images/zuixin-tp6.png"><span>万圣节 · 插画</span>
+            <div class="yy">
+                <div class="web">
+                    <i>万圣节 · 插画</i>
+                    <em>万圣节 摄影图</em>
+                </div>
+            </div>
+        </a></li>
+        <li><a href="javascript:;"><img src="../static/images/zuixin-tp7.png"><span>五谷丰登 · 新年</span>
+            <div class="yy">
+                <div class="web">
+                    <i>五谷丰登 · 新年</i>
+                    <em>五谷丰登 摄影图</em>
+                </div>
+            </div>
+        </a></li>
+        <li><a href="javascript:;"><img src="../static/images/zuixin-tp8.png"><span>万圣节城堡 · 插画</span>
+            <div class="yy">
+                <div class="web">
+                    <i>万圣节城堡 · 插画</i>
+                    <em>万圣节城堡 摄影图</em>
+                </div>
+            </div>
+        </a></li>
+    </ul>
+</div>
+<div class="btn">
+    <a href="javascript:;">查看更多</a>
+</div>
+<div class="toy2">
+    <a href="javascript:;"><h2>优选图片</h2></a>
+</div>
+<div class="ytp">
+    <div class="select2 hd">
+        <li class="on"><a href="javascript:;">多元背景</a></li>
+        <li><a href="javascript:;">唯美人像</a></li>
+        <li><a href="javascript:;">创意插画</a></li>
+        <li><a href="javascript:;">免抠png</a></li>
+    </div>
+    <div class="zuida">
+        <ul>
+            <li><a href="javascript:;"><img src="../static/images/tp1.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp2.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp3.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp4.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp5.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp6.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp7.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp7.7.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp8.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!-- 内容2 -->
+        <ul>
+            <li><a href="javascript:;"><img src="../static/images/tp1.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp2.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp3.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp4.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp5.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp6.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp7.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp7.7.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp8.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!-- 内容3 -->
+        <ul>
+            <li><a href="javascript:;"><img src="../static/images/tp1.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp2.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp3.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp4.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp5.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp6.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp7.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp7.7.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp8.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!-- 内容4 -->
+        <ul>
+            <li><a href="javascript:;"><img src="../static/images/tp1.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp2.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp3.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp4.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp5.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp6.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp7.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp7.7.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="javascript:;"><img src="../static/images/tp8.png"></a>
+                <div class="mei">
+                    <div class="bj">
+                        <span>人像  |  美女</span>
+                        <em>用户</em>
+                    </div>
+                    <div class="xia">
+                        <a href="javascript:;"><img src="../static/images/xiazai.png"></a>
+                        <a href="javascript:;"><img src="../static/images/shouc.png"></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
 <script type="text/javascript">
-    var flag = false;
-    $( function() {
-        $("#keyword").autocomplete({
-            minChars: 0,
-            autoFill:true,
-            source : function(request, response) {
-                var keywordValue = $("#keyword").val()
-                if(keywordValue==" "){
-                    $("#search ul li").remove();
-                    return;
-                }
-                $.ajax({
-                    type : "GET",
-                    url : "stu/findselect",
-                    dataType : "json",
-                    data : {
-                        keyword : $("#keyword").val()
-                    },
-                    success : function(json) {
-                        $("#search ul li").empty();
-                        response($.map(json, function(item) {
-                            $("#search ul").append("<li style='border-radius: 3px;margin-top: 2px;padding-left: 6px;'>" +
-                                "<a href='https://www.baidu.com' style='text-decoration: none'>"+item.name+"</a></li>");
-                        }));
-                    }
-                });
-            }
-        });
-
-        $("#keyword").keyup(function () {
-            var code=$(this).val();
-            if ($.trim(code)==""){
-                $("#search").hide();
-                return;
-            }else {
-                $("#search").show();
-            }
-        });
-        $("#content_ul").on("mouseenter","li",function () {
-           $(this).css("background","#ededed");
-            flag = false;
-
-        });
-        $("#content_ul").on("mouseout","li",function () {
-            $(this).css("background","white");
-            flag=true;
-        });
-        $("#content_ul").on("click","li",function () {
-            var thistext=$(this).text();
-            $("#keyword").val(thistext);
-            $("#search").hide()
-        })
-
-        $("#keyword").blur(function () {
-            if(flag){
-                $("#search").hide();
-            }
-        });
-
-        $("#keyword").focus(function () {
-                $("#search").show();
-            flag=true;
-        });
+    jQuery(".ytp ").slide({//这个是控制所有的
+        mainCell:".zuida",//最大的div，内容不能超出这个div
+        titCell:".select2 li",//所有li里面的内容
+        trigger:"click",//触发点击
     });
-</script>    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</script>
+<div class="btn2">
+    <h3>海量高清图等你来发现</h3>
+    <a href="javascript:;">发现更多</a>
+</div>
+<div class="KaiTongHuiYuan">
+    <div class="yic">
+        <a href="javascript:;">查看详情</a>
+    </div>
+    <div class="huiyuan">
+        <h3>开通会员，享受超值套餐</h3>
+        <div class="vip">
+            <h4>高质量图库，超低价格</h4>
+        </div>
+    </div>
+</div>
+<div class="mfe">
+    <a href="javascript:;"><h2>注册获得每周免费图片</h2></a>
+    <i>FREE PICTURES</i>
+    <a href="javascript:;"><span>查看更多+</span></a>
+    </h2>
+    <div class="mfetp">
+        <ul>
+            <li><a href="javascript:;"><img src="../static/images/mf1.png"></a></li>
+            <li><a href="javascript:;"><img src="../static/images/mf2.png"></a></li>
+            <li><a href="javascript:;"><img src="../static/images/mf3.png"></a></li>
+        </ul>
+    </div>
+</div>
+<div class="dixian">
+    <h3>我可是有底线的哦</h3>
+</div>
+<div class="finish">
+    <div class="finish_logo">
+        <a href="javascript:;"><img src="../static/images/LOGO2.png"/>
+            <span>助力全国中小企业成长</span></a>
+    </div>
+    <div class="youqinglj">
+        <ul>
+            <li><strong>关于我们</strong>
+                <a href="javascript:;">关于我们</a>
+                <a href="javascript:;">加入我们</a>
+                <a href="javascript:;">帮助中心</a>
+                <a href="javascript:;">服务条款</a>
+            </li>
+        </ul>
+        <ul>
+            <li><strong>VIP服务</strong>
+                <a href="javascript:;">个人VIP</a>
+                <a href="javascript:;">购买套餐</a>
+                <a href="javascript:;">服务选择</a>
+                <a href="javascript:;">服务范围</a>
+            </li>
+        </ul>
+        <ul>
+            <li><strong>了解更多</strong>
+                <a href="javascript:;">授权协议</a>
+                <a href="javascript:;">使用条款</a>
+                <a href="javascript:;">隐私政策</a>
+            </li>
+        </ul>
+    </div>
+    <div class="gongzhao">
+        <img src="../static/images/wx.png"/>
+        <img src="../static/images/qq.png"/>
+    </div>
+    <div class="kefu">
+        <span>客服中心</span>
+        <i>4000-333-087</i>
+        <a href="javascript:;">在线客服</a>
+    </div>
+    <div class="db">
+        <span>© 2019 长沙市牛商网络股份有限公司</span>
+    </div>
+</div>
 <script type="text/javascript">
     jQuery(".slideBox").slide({mainCell:".bd ul",effect:"fold",autoPlay:true});
 </script>
 <script>
-if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))){
-new WOW().init();};
-</script>        
+    if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))){
+        new WOW().init();};
+</script>
 </body>
 </html>
