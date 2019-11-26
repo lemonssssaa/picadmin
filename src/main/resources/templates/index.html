@@ -71,9 +71,7 @@
                 <li><a href="javascript:;">创意插画 </a></li>
                 <li><a href="javascript:;">免扣png</a></li>
             </ul>
-            <div th:if="${user} eq null" class="denglu">
-                <a href="/login.html" style="margin-left:30px;position: absolute;top: 0;left: 63px">登录</a>
-            </div>
+
             <div class="denglu" th:if="${user} ne null">
                 <a href="javascript:;">
                 <i th:if="${user.is_grade == 0}">开通VIP</i>
@@ -92,6 +90,9 @@
                     </em>
                 </div>
                 </a>
+            </div>
+            <div th:if="${user} eq null" class="denglu">
+                <a href="/login.html" style="margin-left:30px;position: absolute;top: 0;left: 63px">登录</a>
             </div>
         </div>
     </div>
