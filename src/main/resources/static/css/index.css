@@ -35,7 +35,7 @@ body{overflow-x: hidden;}
 .bd{position: relative;}
 .bd img{height:576px;width: 100%;}
 .ssk{z-index: 2;width: 600px;height: 71px;position: relative;margin:-325px auto 0;}
-.ssk input{width: 600px;height: 71px;border-radius: 35px;opacity: .7;border: 2px solid #F6821F;padding-left: 120px;box-sizing: border-box;font-size: 18px;}
+.ssk input{width: 600px;height: 71px;border-radius: 35px;opacity: .7;border: 2px solid #F6821F;padding-left: 122px;box-sizing: border-box;font-size: 18px;position: relative;}
 .sstb{    width: 122px;height: 70px;float: right;margin-right: -2px;margin-top: -70px;background: #F6821F;position: relative;border-radius: 0px 31px 31px 0;text-align: center;line-height: 110px;}
 .gduo{width: 122px;height: 69px;margin-top: -73px;margin-left: 4px;position: relative;border-radius: 31px 0px 0px 31px;text-align: center;line-height: 110px;border: 0px solid;}
 .gduo select{border: 0px solid;font-size: 17px;margin-top: -40px;background: bottom;outline: none;}

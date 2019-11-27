@@ -21,7 +21,7 @@
             $("#keyword").autocomplete({
                 minLength:0,
                 source: function(request, response) {
-                    var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+                    // var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" ); //正则表达式（不用了）
                     var tags =[] ;
                     var keyword = $("#keyword").val().trim();
                     $.ajax({
@@ -34,17 +34,17 @@
                         success : function(json) {
                             $.map(json, function(item) {
                                 tags.push(item.name);
+
                             })
                             response( $.grep( tags, function(item){
-                                return matcher.test(item);
+                                return true;
                             }) );
+
                             if(tags.length<=0){
-                                $("#ui-id-1").attr("style","top: 493px;left: 581px;width: 358px;display:none");
+                                $("#ui-id-1").attr("style","top: 493px;left: 38.3%;width: 358px;display:none");
                             }else {
-                                $("#ui-id-1").attr("style","top: 493px;left: 581px;width: 358px;");
+                                $("#ui-id-1").attr("style","top: 493px;left: 38.3%;width: 358px;display:block");
                             }
-
-
 
                         }
                     });
@@ -53,13 +53,45 @@
             $("#keyword").focus(function () {
                 var kw=$("#keyword").val().trim();
                 if(kw==""){
-                    $("#ui-id-1").attr("style","top: 493px;left: 581px;width: 358px;display:none").empty();
+                    $("#ui-id-1").hide();
                 }else {
                     $("#ui-id-1").show();
                 }
             })
         });
     </script>
+<!--    <script type="text/javascript">-->
+<!--        $(function (){-->
+<!--            $.ajax({-->
+<!--                type : "GET",-->
+<!--                url : "stu/fuzzySelect",-->
+<!--                dataType : "json",-->
+<!--                data : {-->
+<!--                    -->
+<!--                },-->
+<!--                success : function(json) {-->
+<!--                    -->
+<!--                    // $("#zuida ul li").remove();-->
+<!--                    // $.each(tags,function (i,val) {-->
+<!--                    //     $("#zuida ul li").append("<a><img src="+val.url+"></a>" +-->
+<!--                    //         "<div class=\"mei\">\n" +-->
+<!--                    //         "   <div class=\"bj\">\n" +-->
+<!--                    //         "       <span>多元背景 |  美女</span>\n" +-->
+<!--                    //         // "       <em>用户</em>\n" +-->
+<!--                    //         "   </div>\n" +-->
+<!--                    //         "   <div class=\"xia\">\n" +-->
+<!--                    //         "        <a href=\"javascript:;\"><img src=\"images/xiazai.png\"></a>\n" +-->
+<!--                    //         "        <a href=\"javascript:;\"><img src=\"images/shouc.png\"></a>\n" +-->
+<!--                    //         "   </div>\n" +-->
+<!--                    //         "</div>")-->
+<!--                    // })-->
+<!--                }-->
+<!--            })-->
+<!--        }, {-->
+<!--            -->
+<!--        });-->
+<!--        -->
+<!--    </script>-->
 </head>
 <body>
     <div class="top">
