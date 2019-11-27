@@ -1,12 +1,13 @@
 server:
   port: 8080
+
 spring:
   application:
-    name:nsw
+    name:classdemo
   datasource:
     username: root
-    password: 2001wqz
-    url: jdbc:mysql://localhost:3306/test1?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    password: 123456
+    url: jdbc:mysql://localhost:3306/project1?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
   thymeleaf:
     prefix: classpath:/templates/
