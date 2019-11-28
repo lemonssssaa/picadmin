@@ -5,9 +5,7 @@ import com.nsw.dirs.Student;
 import com.nsw.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,15 +20,14 @@ import java.util.List;
  * @Description: todo
  */
 @RestController
-@RequestMapping(value = "stu",produces = {"application/json;charset=UTF-8"})
+@RequestMapping("stu")
 public class StudentController {
     @Autowired
     StudentService studentService;
 
     @GetMapping("/fuzzySelect")
-    public String findSelect(HttpServletRequest request) throws UnsupportedEncodingException {
-        request.setCharacterEncoding("utf-8");
-        String keyword=request.getParameter("keyword");
+    @ResponseBody
+    public String findSelect(@RequestParam("keyword")String keyword ){
         String searChe = keyword.replaceAll("%","").replaceAll(" ","")
                 .replaceAll("_","");
         List<Student> list=null;

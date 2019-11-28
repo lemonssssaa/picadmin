@@ -62,35 +62,38 @@
     </script>
 <!--    <script type="text/javascript">-->
 <!--        $(function (){-->
-<!--            $.ajax({-->
-<!--                type : "GET",-->
-<!--                url : "stu/fuzzySelect",-->
-<!--                dataType : "json",-->
-<!--                data : {-->
-<!--                    -->
-<!--                },-->
-<!--                success : function(json) {-->
-<!--                    -->
-<!--                    // $("#zuida ul li").remove();-->
-<!--                    // $.each(tags,function (i,val) {-->
-<!--                    //     $("#zuida ul li").append("<a><img src="+val.url+"></a>" +-->
-<!--                    //         "<div class=\"mei\">\n" +-->
-<!--                    //         "   <div class=\"bj\">\n" +-->
-<!--                    //         "       <span>多元背景 |  美女</span>\n" +-->
-<!--                    //         // "       <em>用户</em>\n" +-->
-<!--                    //         "   </div>\n" +-->
-<!--                    //         "   <div class=\"xia\">\n" +-->
-<!--                    //         "        <a href=\"javascript:;\"><img src=\"images/xiazai.png\"></a>\n" +-->
-<!--                    //         "        <a href=\"javascript:;\"><img src=\"images/shouc.png\"></a>\n" +-->
-<!--                    //         "   </div>\n" +-->
-<!--                    //         "</div>")-->
-<!--                    // })-->
-<!--                }-->
-<!--            })-->
-<!--        }, {-->
-<!--            -->
-<!--        });-->
-<!--        -->
+<!--            var slt2 = $("#select2").val();-->
+<!--            $("#select2").click(function () {-->
+<!--                $.ajax({-->
+<!--                    type : "GET",-->
+<!--                    url : "stu/fuzzySelect",-->
+<!--                    dataType : "json",-->
+<!--                    data : {keyword : slt2},-->
+<!--                    success : function(data) {-->
+<!--                        $("#zuida ul li").remove();-->
+<!--                        $.each(data,function (index,item) {-->
+<!--                            $(".zuida ul li").append('<a>' + '<img src="' +item.url+'">' + '</a>'+-->
+<!--                                '<div class="mei">'+-->
+<!--                                '   <div class="bj">'+-->
+<!--                                '       <span>多元背景 |  美女</span> '+-->
+<!--                                '<em>用户</em>'+-->
+<!--                                '</div>'+-->
+<!--                                '<div class="xia">'+-->
+<!--                                '       <a href=\"javascript:;\"><img src="images/xiazai.png"></a>'+-->
+<!--                                '       <a href=\"javascript:;\"><img src="images/shouc.png"></a>'+-->
+<!--                                '   </div>' +-->
+<!--                                '</div>');-->
+<!--                        });-->
+
+<!--                    },-->
+<!--                    error:function(error){-->
+<!--                        console.log('错误');-->
+<!--                    },-->
+<!--                })-->
+
+<!--            });       })-->
+
+
 <!--    </script>-->
 </head>
 <body>
@@ -253,7 +256,7 @@
         <a href="javascript:;"><h2>优选图片</h2></a>
     </div>
     <div class="ytp">
-        <div class="select2 hd">
+        <div class="select2 hd" id="select2">
             <li class="on"><a href="javascript:;">多元背景</a></li>
             <li><a href="javascript:;">唯美人像</a></li>
             <li><a href="javascript:;">创意插画</a></li>
