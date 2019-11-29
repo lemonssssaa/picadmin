@@ -26,19 +26,19 @@
                     var keyword = $("#keyword").val().trim();
                     $.ajax({
                         type : "GET",
-                        url : "stu/fuzzySelect",
+                        url : "sdu/fuzzySelect",
                         dataType : "json",
                         data : {
                             keyword : keyword
                         },
-                        success : function(json) {
-                            $.map(json, function(item) {
+                        success : function(data) {
+                            $.map(data, function(item) {
                                 tags.push(item.name);
 
-                            })
-                            response( $.grep( tags, function(item){
+                            });
+                            response($.grep(tags, function(){
                                 return true;
-                            }) );
+                            }));
 
                             if(tags.length<=0){
                                 $("#ui-id-1").attr("style","top: 493px;left: 38.3%;width: 358px;display:none");
@@ -57,46 +57,46 @@
                 }else {
                     $("#ui-id-1").show();
                 }
-            })
+
+            });
         });
     </script>
-<!--    <script type="text/javascript">-->
-<!--        $(function (){-->
-<!--            var slt2 = $("#select2").val();-->
-<!--            $("#select2").click(function () {-->
-<!--                $.ajax({-->
-<!--                    type : "GET",-->
-<!--                    url : "stu/fuzzySelect",-->
-<!--                    dataType : "json",-->
-<!--                    data : {keyword : slt2},-->
-<!--                    success : function(data) {-->
-<!--                        $("#zuida ul li").remove();-->
-<!--                        $.each(data,function (index,item) {-->
-<!--                            $(".zuida ul li").append('<a>' + '<img src="' +item.url+'">' + '</a>'+-->
-<!--                                '<div class="mei">'+-->
-<!--                                '   <div class="bj">'+-->
-<!--                                '       <span>多元背景 |  美女</span> '+-->
-<!--                                '<em>用户</em>'+-->
-<!--                                '</div>'+-->
-<!--                                '<div class="xia">'+-->
-<!--                                '       <a href=\"javascript:;\"><img src="images/xiazai.png"></a>'+-->
-<!--                                '       <a href=\"javascript:;\"><img src="images/shouc.png"></a>'+-->
-<!--                                '   </div>' +-->
-<!--                                '</div>');-->
-<!--                        });-->
+    <script type="text/javascript">
+        $(function (){
+                $.ajax({
+                    type : "GET",
+                    url : "sdu/fuzzySelect",
+                    dataType : "json",
+                    data : {},
+                    success : function(data) {
+                        $("#zuida ul li").remove();
+                        $.each(data,function (index,item) {
+                            $(".zuida ul li").append("<a><img src='"+item.url+"'/></a>"+
+                                "<div class='mei'>" +
+                                    "<div class='bj'>" +
+                                        "<span>人像 |"+item.name+"</span>"+
+                                        // "<em>用户</em>"+
+                                    "</div>"+
+                                    "<div class='xia'>" +
+                                        "<a href='javascript:;'><img src='images/xiazai.png'/></a>"+
+                                        "<a href='javascript:;'><img src='images/shouc.png'/></a>"+
+                                    "</div>"+
+                                "</div>"
+                            );
+                        });
+                    },
+                    error:function(jqXHR){
+                        console.log(jqXHR.readyState);
+                        console.log(jqXHR.status);
+                        console.log(jqXHR.responseText);
+                    },
+                })
 
-<!--                    },-->
-<!--                    error:function(error){-->
-<!--                        console.log('错误');-->
-<!--                    },-->
-<!--                })-->
-
-<!--            });       })-->
-
-
-<!--    </script>-->
+            });
+    </script>
 </head>
 <body>
+
     <div class="top">
         <h1><a href="javascript:;"><img src="images/LOGO.png"><span>牛商网</span></a></h1>
         <div class="chaolj">

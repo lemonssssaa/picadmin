@@ -18,7 +18,7 @@ import java.util.List;
  * @Description: todo
  */
 @RestController
-@RequestMapping("stu")
+@RequestMapping("sdu")
 public class StudentController {
     @Autowired
     StudentService studentService;
