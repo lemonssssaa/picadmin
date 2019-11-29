@@ -1,6 +1,6 @@
 package com.nsw.service;
 
-import com.nsw.dirs.Dirs;
+import com.nsw.entity.Dirs;
 
 import java.util.List;
 

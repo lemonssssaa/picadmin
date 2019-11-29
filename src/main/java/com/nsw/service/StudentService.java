@@ -1,9 +1,8 @@
 package com.nsw.service;
 
-import com.nsw.dirs.Student;
+import com.nsw.entity.Student;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author WengQiZhi

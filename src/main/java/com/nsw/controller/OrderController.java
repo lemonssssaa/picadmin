@@ -1,8 +1,7 @@
 package com.nsw.controller;
 
-import com.nsw.dirs.User;
 import com.nsw.mapper.OrderMapper;
-import com.nsw.dirs.Order;
+import com.nsw.entity.Order;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;

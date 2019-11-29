@@ -1,6 +1,6 @@
 package com.nsw.mapper;
 
-import com.nsw.dirs.Dirs;
+import com.nsw.entity.Dirs;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,6 @@
 package com.nsw.dao;
 
-import com.nsw.dirs.Shipin;
+import com.nsw.entity.Shipin;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nsw.mapper.IDirsMapper">
-    <resultMap id="studentResultMap2" type="com.nsw.dirs.Dirs">
+    <resultMap id="studentResultMap2" type="com.nsw.entity.Dirs">
         <id column="dirs_id" jdbcType="INTEGER" property="dirs_id"/>
         <result column="dirs_name" jdbcType="VARCHAR" property="dirs_name"/>
         <result column="dirs_state" jdbcType="VARCHAR" property="dirs_state"/>
@@ -17,16 +17,16 @@
          select * from dictionary
     </select>
 
-    <delete id="delete" parameterType="com.nsw.dirs.Dirs">
+    <delete id="delete" parameterType="com.nsw.entity.Dirs">
         <!-- @auto -->
         delete from dictionary where dirs_id=#{dirs_id,jdbcType=INTEGER}
     </delete>
 
-    <insert id="insert" parameterType="com.nsw.dirs.Dirs">
+    <insert id="insert" parameterType="com.nsw.entity.Dirs">
         insert into dictionary values (#{dirs_id,jdbcType=INTEGER},#{dirs_name,jdbcType=VARCHAR},#{dirs_state,jdbcType=VARCHAR})
     </insert>
 
-    <update id="updata" parameterType="com.nsw.dirs.Dirs">
+    <update id="updata" parameterType="com.nsw.entity.Dirs">
         update dictionary set dirs_name=#{dirs_name,jdbcType=VARCHAR},dirs_state=#{dirs_state,jdbcType=VARCHAR} where dirs_id=#{dirs_id,jdbcType=INTEGER}
     </update>
 

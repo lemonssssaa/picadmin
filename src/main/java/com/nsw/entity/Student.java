@@ -1,4 +1,4 @@
-package com.nsw.dirs;
+package com.nsw.entity;
 
 import lombok.Data;
 import java.io.Serializable;
