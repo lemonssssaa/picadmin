@@ -1,6 +1,6 @@
 package com.nsw.mapper;
 
-import com.nsw.dirs.Student;
+import com.nsw.entity.Student;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

@@ -1,12 +1,10 @@
-package com.nsw.dirs;
+package com.nsw.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.data.annotation.CreatedDate;
 
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 
 public class Order implements Serializable {
     public String getPt() {

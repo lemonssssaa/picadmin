@@ -1,7 +1,7 @@
 package com.nsw.service.impl;
 
 import com.nsw.mapper.IDirsMapper;
-import com.nsw.dirs.Dirs;
+import com.nsw.entity.Dirs;
 import com.nsw.service.IDirsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

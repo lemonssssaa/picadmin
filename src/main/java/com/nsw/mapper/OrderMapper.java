@@ -1,6 +1,6 @@
 package com.nsw.mapper;
 
-import com.nsw.dirs.Order;
+import com.nsw.entity.Order;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.nsw.service.impl;
 
-import com.nsw.dirs.Student;
+import com.nsw.entity.Student;
 import com.nsw.mapper.StudentMapper;
 import com.nsw.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;

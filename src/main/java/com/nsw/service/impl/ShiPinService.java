@@ -1,7 +1,7 @@
 package com.nsw.service.impl;
 
 import com.nsw.dao.ShiPinDao;
-import com.nsw.dirs.Shipin;
+import com.nsw.entity.Shipin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;

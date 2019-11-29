@@ -1,15 +1,13 @@
 package com.nsw.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.nsw.dirs.Student;
+import com.nsw.entity.Student;
 import com.nsw.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 

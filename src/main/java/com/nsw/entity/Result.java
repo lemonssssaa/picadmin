@@ -1,4 +1,4 @@
-package com.nsw.dirs;
+package com.nsw.entity;
 
 /**
  * 向前端返回信息封装
