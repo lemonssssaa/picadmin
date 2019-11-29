@@ -1,5 +1,6 @@
 package com.nsw.controller;
 
+import com.nsw.entity.User;
 import com.nsw.mapper.OrderMapper;
 import com.nsw.entity.Order;
 import com.github.pagehelper.PageHelper;
@@ -7,13 +8,15 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 @Controller
 //@ResponseBody
-
+@RequestMapping("/order")
 public class OrderController {
     @Autowired
     OrderMapper orderMapper;
@@ -26,10 +29,11 @@ public class OrderController {
         return "redirect:listUser";
     }
     //查询
-    @RequestMapping("/selectUser")
-    public String kindAll(Order user) throws Exception{
-        orderMapper.kindAll(user);
-        return "index";
+    @GetMapping("/selectUser")
+    @ResponseBody
+    public List<Order> kindAll(String imagename){
+
+        return orderMapper.kindAll(imagename) ;
     }
     //刪除
     @RequestMapping("/deleteUser")

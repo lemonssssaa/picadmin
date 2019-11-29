@@ -9,7 +9,7 @@
     <script type="text/javascript">
         function save() {
             $.ajax({
-                url: "/selectUser",
+                url: "/order/selectUser",
                 type: "GET",
                 datatype: "JSON",
                 data: {
@@ -20,7 +20,7 @@
                     // var student = $.parseJSON(json);
                     var index =$(".wdxz .hd li.on").index();
 
-                    $(".wdxz .imageDownload:eq("+dingdan+") .imageDownDetail").remove();
+                    $(".wdxz .imageDownload:eq("+index+") .imageDownDetail").remove();
                     $.each(json, function (index, value) {
                         console.log(value);
                         $(".imageDownload ul").after("<div class=\"tu1 imageDownDetail\">" +

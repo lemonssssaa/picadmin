@@ -36,8 +36,8 @@ public class Order implements Serializable {
     private String imagename;
     private  double imagesize;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
-    private Date imagetime;
+
+    private String imagetime;
 
     private int id;
     private String name;
@@ -60,11 +60,11 @@ public class Order implements Serializable {
 
 
 
-    public Date getImagetime() {
+    public String getImagetime() {
         return imagetime;
     }
 
-    public void setImagetime(Date imagetime) {
+    public void setImagetime(String imagetime) {
         this.imagetime = imagetime;
     }
 
