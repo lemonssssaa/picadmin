@@ -10,10 +10,10 @@ import java.io.Serializable;
  * @Description: todo
  */
 @Data
-public class Student implements Serializable {
+public class Sdu implements Serializable {
     private static final long serialVersionUID = -9052334813852875933L;
     private Integer id;
     private String name;
     private String url;
-
+    private String title;
 }

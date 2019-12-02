@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.nsw.mapper.StudentMapper">
-    <resultMap id="studentResultMap" type="com.nsw.entity.Student">
+<mapper namespace="com.nsw.mapper.SdtMapper">
+    <resultMap id="studentResultMap" type="com.nsw.entity.Sdu">
                 <id column="id" jdbcType="INTEGER" property="id"/>
                 <result column="name" jdbcType="VARCHAR" property="name"/>
                 <result column="url" jdbcType="VARCHAR" property="url"/>
     </resultMap>
-    <select id="fuzzySelect" resultType="com.nsw.entity.Student" parameterType="string">
+    <select id="fuzzySelect" resultType="com.nsw.entity.Sdu" parameterType="string">
         select *from tptp where name like concat('%',#{keyword},'%')
+    </select>
+    <select id="selectAll" resultType="com.nsw.entity.Sdu" parameterType="string">
+        select url,title from tptp
     </select>
 </mapper>

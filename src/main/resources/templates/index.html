@@ -63,34 +63,37 @@
     </script>
     <script type="text/javascript">
         $(function (){
-                $.ajax({
-                    type : "GET",
-                    url : "sdu/fuzzySelect",
-                    dataType : "json",
-                    data : {},
-                    success : function(data) {
-                        $("#zuida ul li").remove();
-                        $.each(data,function (index,item) {
-                            $(".zuida ul li").append("<a><img src='"+item.url+"'/></a>"+
-                                "<div class='mei'>" +
-                                    "<div class='bj'>" +
-                                        "<span>人像 |"+item.name+"</span>"+
-                                        // "<em>用户</em>"+
-                                    "</div>"+
-                                    "<div class='xia'>" +
-                                        "<a href='javascript:;'><img src='images/xiazai.png'/></a>"+
-                                        "<a href='javascript:;'><img src='images/shouc.png'/></a>"+
-                                    "</div>"+
-                                "</div>"
-                            );
-                        });
-                    },
-                    error:function(jqXHR){
-                        console.log(jqXHR.readyState);
-                        console.log(jqXHR.status);
-                        console.log(jqXHR.responseText);
-                    },
-                })
+               $("#select2 li").click(function () {
+                   $.ajax({
+                       type : "GET",
+                       url : "sdu/selectAll",
+                       dataType : "json",
+                       data : {
+                           keyword:$("#select2 li").val
+                       },
+                       success : function(data) {
+                           $("#zuida ul li").remove();
+                           $.each(data,function (index,item) {
+                               $("#zuida ul").append("<li><a><img src='"+item.url+"'/></a>"+
+                                   "<div class='mei'>" +
+                                   "<div class='bj'>" +
+                                   "<span>图片 |"+item.title+"</span>"+
+                                   // "<em>用户</em>"+
+                                   "</div>"+
+                                   "<div class='xia'>" +
+                                   "<a href='javascript:;'><img src='images/xiazai.png'/></a>"+
+                                   "<a href='javascript:;'><img src='images/shouc.png'/></a>"+
+                                   "</div>"+
+                                   "</div></li>"
+                               );
+                           });
+                       },
+                       error:function(err){
+                           console.log(err.statusText);
+                           console.log("异常");
+                       },
+                   })
+               })
 
             });
     </script>

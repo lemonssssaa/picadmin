@@ -1,15 +1,10 @@
 package com.nsw.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.nsw.entity.Student;
-import com.nsw.service.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
+
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author WengQiZhi
@@ -17,25 +12,10 @@ import java.util.List;
  * @date 2019-10-29 17:06
  * @Description: todo
  */
-@RestController
-@RequestMapping("sdu")
+@Controller
 public class StudentController {
-    @Autowired
-    StudentService studentService;
 
-    @GetMapping("/fuzzySelect")
-    @ResponseBody
-    public String findSelect(@RequestParam("keyword")String keyword ){
-        String searChe = keyword.replaceAll("%","").replaceAll(" ","")
-                .replaceAll("_","");
-        List<Student> list=null;
-        if(!StringUtils.isEmpty(searChe)){
-            list =studentService.fuzzySelect(keyword);
-        }else {
-            list = new ArrayList<>();
-        }
-        return JSONObject.toJSONString(list);
-    }
+
 
     @RequestMapping("/Blog")
     public ModelAndView index(){

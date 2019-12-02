@@ -1,6 +1,6 @@
 package com.nsw.service;
 
-import com.nsw.entity.Student;
+import com.nsw.entity.Sdu;
 
 import java.util.List;
 
@@ -10,7 +10,9 @@ import java.util.List;
  * @date 2019-10-29 17:01
  * @Description: todo
  */
-public interface StudentService {
+public interface SdtService {
 
-    List<Student> fuzzySelect(String name);
+    List<Sdu> fuzzySelect(String name);
+
+    List<Sdu> selectAll();
 }
