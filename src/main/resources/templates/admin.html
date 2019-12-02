@@ -9,16 +9,11 @@
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
     </script>
     <script type="text/javascript">
-        $(function () {
-            loadData();
-            // $("#row-tbody-tr").on("click","a",function () {
-            //     $(this).closest("tr").remove();
-            // })
-        });
-
+        var name=$("#dirs_name").val().length;
+        var state=$("#dirs_states").val().length;
         function updata(ap) {
-            if ($("#dirs_name").val().length>2) {
-                if ($("#dirs_states").val().length>2){
+            if (name>2) {
+                if (state>2){
                     $.ajax({
                         url: "dirs/updata",
                         type: "GET",
@@ -33,10 +28,10 @@
                         }
                     });
                 }else{
-                    alert("编码长度不能少于2位");
+                    alert("编码长度不能多余8位或者少于2位");
                 }
             }else{
-                alert("名称长度不能少于2位");
+                alert("名称长度不能多余12位或者少于2位");
             }
         }
 
@@ -82,7 +77,12 @@
 
         }
 
-
+        $(function () {
+            loadData();
+            // $("#row-tbody-tr").on("click","a",function () {
+            //     $(this).closest("tr").remove();
+            // })
+        });
 
         function loadData() {
             $.ajax({
@@ -159,11 +159,12 @@
         <div class="backstage_main_right">
             <div class="dy1">
                 <div class="bread_tit">当前位置 | 用户管理 > 用户列表</div>
-                <a href="" class="xzjs">新增用户+</a>
-                <div class="jsmc">角色名称: <input type="text" /></div>
-                <div class="jsfz">角色分组: <input type="text" /></div>
-                <a class="sousuo1"  href="">搜索</a>
-                <div class="row">
+                <form action="addUser" method="post">
+                    <button  class="xzjs" type="submit">新增用户+</button>
+                    <div class="jsmc">角色名称: <input name="username"  placeholder="请输入你的名称" /></div>
+                    <a class="sousuo1"  href="">搜索</a>
+                </form>
+                <div class="row" th:fragment="content">
                     <table>
                         <thead>
                             <th>角色名称</th>
@@ -173,20 +174,19 @@
                             <th>操作</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>CONAN_1996</td>
-                                <td>管理员</td>
-                                <td>001</td>
-                                <td>2019-11-4</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            <tr th:each="c:${pages.list}">
+                                <td th:text="${c.getUsername()}">1</td>
+                                <td th:text="${c.getActive_status()}"></td>
+                                <td th:text="${c.getId()}">username</td>
+                                <td th:text="${c.getEmail()}"></td>
+                                <td><a th:href="@{/findUser(id=${c.id})}">编辑</a>   |   <a th:href="@{/deleteUser(id=${c.id})}">删除</a></td>
                             </tr>
-                            <tr>
-                                <td>CONAN_1996</td>
-                                <td>管理员</td>
-                                <td>001</td>
-                                <td>2019-11-4</td>
-                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
-                            </tr>
+                            <div>
+                                <a th:href="@{/admin(start=0)}">[首  页]</a>
+                                <a th:href="@{/admin(start=${pages.pageNum -1})}">[上一页]</a>
+                                <a th:href="@{/admin(start=${pages.pageNum+1})}">[下一页]</a>
+                                <a th:href="@{/admin(start=${pages.pages})}">[末  页]</a>
+                            </div>
                         </tbody>
                     </table>
                 </div>
@@ -425,7 +425,18 @@
                             <th>操作</th>
                         </thead>
                         <tbody>
-
+                            <tr>
+                                <td>CONAN_1996</td>
+                                <td>管理员</td>
+                                <td>001</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>CONAN_1996</td>
+                                <td>管理员</td>
+                                <td>001</td>
+                                <td><a href="">编辑</a>   |   <a href="">删除</a></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

@@ -18,7 +18,7 @@ public interface OrderMapper {
     @Select("select * from image_05mkpng")
     List<Order> mk();
     @Select("select * from image_01 where imagename=#{imagename}")
-    List <Order>kindAll(Order user);
+    List <Order>kindAll(String imagename);
     //添加
      @Insert("insert into image_01 (id,name,imagename) values (#{id},#{name},#{imagename})")
     public int save(Order user);
