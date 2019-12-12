@@ -68,15 +68,4 @@ public class User {
         this.activeCode = activeCode;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", activeStatus=" + activeStatus +
-                ", activeCode='" + activeCode + '\'' +
-                '}';
-    }
 }
