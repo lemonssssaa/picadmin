@@ -6,8 +6,8 @@ spring:
     name:classdemo
   datasource:
     username: root
-    password: 123456
-    url: jdbc:mysql://localhost:3306/project1?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    password: 20020522
+    url: jdbc:mysql://localhost:3306/study?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
   thymeleaf:
     cache: false

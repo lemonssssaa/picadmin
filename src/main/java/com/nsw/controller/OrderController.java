@@ -83,7 +83,10 @@ public class OrderController {
 
         return "index";
     }
-
+    @RequestMapping("/abc")
+    public String all(){
+        return "xqy";
+    }
 
 
 
