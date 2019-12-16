@@ -263,29 +263,116 @@
                 </script>
             </div>
 
-
+            <script>
+                function login() {
+                    $("#mf").click(function () {
+                        $("#dier li:eq(1)").trigger("click")
+                        $.ajax({
+                            type: "POST",   //提交的方法
+                            url: "tijiao", //提交的地址
+                            data: $('#mf').serialize(),// 序列化表单值
+                            async: false,
+                        });
+                    });
+                }
+                function upperCase()
+                {
+                    var phone = document.getElementById('phone').value;
+                    if(!(/^1[34578]\d{9}$/.test(phone))){
+                        alert("手机号码有误，请重填");
+                        return false;
+                    }
+                }
+            </script>
             <div class="grrz">
-                <div class="hd clearfix">
+                <div class="hd clearfix" id="dier">
                     <li class="on"><a>1.填写认证</a></li>
                     <li><a>2.等待审核</a></li>
                     <li><a>3.认证通过</a></li>
                 </div>
                 <div class="bd">
                     <div class="grxx">
-                        <p>
-                            <i>姓名：</i>
-                            <input type="text">
-                            <em>*为了您的利益，请填写真实姓名</em>
-                        </p>
-                        <p>
-                            <i>电话号码：</i>
-                            <input type="text">
-                        </p>
-                        <p>
-                            <i>电子邮箱：</i>
-                            <input type="text">
-                        </p>
-                        <span><input type="button" value="提交"></span>
+                        <form id="mf" class="form-horizontal" name="form1" onsubmit="return check_submit()">
+                            <p>
+                                <i>姓名：</i>
+                                <input type="text" class="form-control" placeholder="姓名" name="username" onblur="blur_username()"
+                                       onfocus="focus_username()"/>
+                                <em id="result_name"></em>
+                                <script type="text/javascript">
+                                    var flag = false;
+                                    function focus_username() {
+                                        var nameObj = document.getElementById("result_name");
+                                        nameObj.innerHTML = "用户名不能包含特殊字符且为3~5位";
+                                        nameObj.style.color = "#999";
+                                    }
+
+                                    function blur_username() {
+                                        var nameObj = document.getElementById("result_name");
+
+                                        var str2 = check_user_name(document.form1.username.value);
+                                        nameObj.style.color = "red";
+                                        if ("该用户名合法" == str2) {
+                                            flag = true;
+                                            nameObj.innerHTML = str2;
+                                        } else {
+                                            nameObj.innerHTML = str2;
+                                        }
+
+                                    }
+                                    function check_user_name(str) {
+                                        var str2 = "该用户名合法";
+                                        if ("" == str) {
+                                            str2 = "用户名为空";
+                                            return str2;
+                                        } else if ((str.length < 3) || (str.length > 5)) {
+                                            str2 = "用户名必须为3 ~ 5位";
+                                            return str2;
+                                        } else if (check_other_char(str)) {
+                                            str2 = "不能含有特殊字符";
+                                            return str2;
+                                        }
+                                        return str2;
+                                    }
+                                    function check_other_char(str) {
+                                        var arr = ["&", "\\", "/", "*", ">", "<", "@", "!"];
+                                        for (var i = 0; i < arr.length; i++) {
+                                            for (var j = 0; j < str.length; j++) {
+                                                if (arr[i] == str.charAt(j)) {
+                                                    return true;
+                                                }
+                                            }
+                                        }
+                                        return false;
+                                    }
+                                    function check_submit() {
+                                        if (flag == false) {
+                                            return false;
+                                        }
+                                        return true;
+                                    }
+                                </script>
+                            </p>
+                            <p>
+                                <i>电话号码：</i>
+                                <input class="form-control" type="text" placeholder="电话号码" name="password" id="phone" onblur="upperCase()">
+                            </p>
+                            <p>
+                                <i>电子邮箱：</i>
+                                <input type="email" class="form-control" placeholder="电子邮箱" name="mailbox" id="email"/>
+                                <script>
+                                    email.onchange = function(){
+                                        var email = this.value;
+                                        var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+                                        if(reg.test(email)){
+                                            alert("邮箱格式正确");
+                                        }else{
+                                            alert("邮箱格式不正确");
+                                        }
+                                    }
+                                </script>
+                            </p>
+                            <span id="dd"><input type="button" value="提交" id="anj" onclick="login()"></span>
+                        </form>
                     </div>
                     <div class="shz">
                         <i><img src="images/logo2.png" alt=""></i>

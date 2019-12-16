@@ -6,12 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class Aaaa {
     @Autowired
     private AaaService aaa;
-    @PostMapping("aaa")
+    @PostMapping("tijiao")
+    @ResponseBody
     public String aa(@RequestParam("username") String username,
                      @RequestParam("password") String password,
                      @RequestParam("mailbox") String mailbox){
